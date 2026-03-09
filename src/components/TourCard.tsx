@@ -6,75 +6,92 @@ function formatPrice(n: number) {
   return n.toLocaleString("th-TH");
 }
 
+function getTripPaceLabel(days: number) {
+  if (days <= 4) return "ทริปสั้น";
+  if (days >= 7) return "จัดเต็มหลายวัน";
+  return "บาลานซ์กำลังดี";
+}
+
 export default function TourCard({ tour }: { tour: Tour }) {
+  const savings = tour.originalPrice ? tour.originalPrice - tour.price : 0;
+
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
-      {/* Image */}
-      <div className="relative h-52 overflow-hidden">
+    <div className="group flex h-full flex-col overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-950/10">
+      <div className="relative h-56 overflow-hidden">
         <Image
           src={tour.image}
           alt={tour.title}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        {/* Overlay info */}
-        <div className="absolute top-3 left-3 flex gap-2">
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/65 via-slate-950/10 to-transparent" />
+
+        <div className="absolute left-3 top-3 flex flex-wrap gap-2">
           {tour.tag && (
-            <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+            <span className="rounded-full bg-red-500 px-3 py-1 text-xs font-bold text-white">
               {tour.tag}
             </span>
           )}
-          <span className="bg-white/90 backdrop-blur text-gray-700 text-xs font-semibold px-3 py-1 rounded-full">
-            {tour.type === "international" ? "🌏 ต่างประเทศ" : "🇹🇭 ในประเทศ"}
+          <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 backdrop-blur">
+            {tour.type === "international" ? "ต่างประเทศ" : "ในประเทศ"}
           </span>
         </div>
-        <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur text-white text-xs font-semibold px-3 py-1.5 rounded-lg">
+
+        <div className="absolute bottom-3 right-3 rounded-xl bg-black/55 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">
           {tour.days} วัน {tour.nights} คืน
         </div>
       </div>
 
-      {/* Content */}
-      <div className="flex flex-col flex-1 p-5">
-        {/* Destination & Country */}
-        <div className="flex items-center gap-2 text-sm text-blue-600 font-medium mb-1">
-          <span>📍</span>
-          <span>
-            {tour.destination} · {tour.country}
-          </span>
+      <div className="flex flex-1 flex-col p-5">
+        <div className="mb-1 text-sm font-medium text-blue-600">
+          {tour.destination} · {tour.country}
         </div>
 
-        {/* Title */}
-        <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-700 transition-colors">
+        <h3 className="mb-3 line-clamp-2 text-lg font-bold text-slate-900 transition-colors group-hover:text-blue-700">
           {tour.title}
         </h3>
 
-        {/* Highlights */}
-        <ul className="text-sm text-gray-500 space-y-1 mb-4 flex-1">
-          {tour.highlights.slice(0, 3).map((h) => (
-            <li key={h} className="flex items-start gap-2">
-              <span className="text-blue-400 mt-0.5">✓</span>
-              <span>{h}</span>
+        <div className="mb-4 flex flex-wrap gap-2">
+          <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+            {getTripPaceLabel(tour.days)}
+          </span>
+          {savings > 0 ? (
+            <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+              ประหยัด ฿{formatPrice(savings)}
+            </span>
+          ) : (
+            <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+              ราคาโปรไฟล์คุ้มค่า
+            </span>
+          )}
+        </div>
+
+        <ul className="flex-1 space-y-1 text-sm text-slate-500">
+          {tour.highlights.slice(0, 3).map((highlight) => (
+            <li key={highlight} className="flex items-start gap-2">
+              <span className="mt-0.5 text-blue-400">✓</span>
+              <span>{highlight}</span>
             </li>
           ))}
         </ul>
 
-        {/* Price + CTA */}
-        <div className="flex items-end justify-between pt-4 border-t border-gray-100">
+        <div className="mt-5 flex items-end justify-between border-t border-slate-100 pt-4">
           <div>
             {tour.originalPrice && (
-              <span className="text-sm text-gray-400 line-through mr-2">
+              <span className="mr-2 text-sm text-slate-400 line-through">
                 ฿{formatPrice(tour.originalPrice)}
               </span>
             )}
             <div className="text-2xl font-extrabold text-blue-700">
               ฿{formatPrice(tour.price)}
             </div>
-            <span className="text-xs text-gray-400">ต่อท่าน</span>
+            <span className="text-xs text-slate-400">ต่อท่าน</span>
           </div>
+
           <Link
             href={`/tour/${tour.id}`}
-            className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all hover:scale-105"
+            className="rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:scale-105 hover:bg-blue-700"
           >
             ดูรายละเอียด
           </Link>
