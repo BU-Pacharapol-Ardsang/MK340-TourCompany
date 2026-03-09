@@ -9,9 +9,9 @@ const geistSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "MK340 Tours — ทัวร์ต่างประเทศ & ในประเทศ",
+  title: "Travie Tours — ทัวร์ต่างประเทศ & ในประเทศ",
   description:
-    "แพ็กเกจทัวร์คุณภาพ ราคาโปร่งใส ทั้งทัวร์ต่างประเทศและในประเทศ พร้อมไกด์ดูแลตลอดทริป",
+    "แพ็กเกจทัวร์คุณภาพ ราคาโปร่งใส ทั้งทัวร์ต่างประเทศและในประเทศ พร้อมทีมดูแลตลอดการเดินทาง",
 };
 
 export default function RootLayout({

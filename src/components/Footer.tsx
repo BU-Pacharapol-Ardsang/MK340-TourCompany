@@ -2,48 +2,47 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-400 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
+    <footer className="bg-gray-900 pb-8 pt-16 text-gray-400">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="mb-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <span className="text-2xl">✈️</span>
-              <span className="text-xl font-bold text-white tracking-tight">
-                MK340 <span className="font-light">Tours</span>
+            <Link href="/" className="mb-4 flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-sm font-extrabold text-white shadow-lg shadow-blue-600/25">
+                TT
+              </span>
+              <span className="text-xl font-bold tracking-tight text-white">
+                Travie <span className="font-light">Tours</span>
               </span>
             </Link>
             <p className="text-sm leading-relaxed">
-              บริษัททัวร์ครบวงจร จัดทริปทั้งในและต่างประเทศ
-              ดูแลทุกรายละเอียด ให้คุณเที่ยวแบบไร้กังวล
+              เว็บไซต์ทัวร์ครบวงจรสำหรับลูกค้าที่มองหาทริปทั้งในประเทศและต่างประเทศ
+              พร้อมข้อมูลชัดเจน ราคาโปร่งใส และทีมงานคอยดูแลตลอดการเดินทาง
             </p>
           </div>
 
-          {/* Quick links */}
           <div>
-            <h4 className="text-white font-semibold mb-4">ลิงก์ด่วน</h4>
+            <h4 className="mb-4 font-semibold text-white">ลิงก์ด่วน</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#packages" className="hover:text-white transition-colors">
+                <a href="#packages" className="transition-colors hover:text-white">
                   แพ็กเกจทัวร์
                 </a>
               </li>
               <li>
-                <a href="#why-us" className="hover:text-white transition-colors">
+                <a href="#why-us" className="transition-colors hover:text-white">
                   ทำไมต้องเรา
                 </a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-white transition-colors">
+                <a href="#contact" className="transition-colors hover:text-white">
                   ติดต่อ
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Tour types */}
           <div>
-            <h4 className="text-white font-semibold mb-4">ประเภททัวร์</h4>
+            <h4 className="mb-4 font-semibold text-white">ประเภททัวร์</h4>
             <ul className="space-y-2 text-sm">
               <li>ทัวร์ญี่ปุ่น</li>
               <li>ทัวร์เกาหลี</li>
@@ -52,20 +51,19 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h4 className="text-white font-semibold mb-4">ติดต่อเรา</h4>
+            <h4 className="mb-4 font-semibold text-white">ติดต่อเรา</h4>
             <ul className="space-y-2 text-sm">
-              <li>📞 081-234-5678</li>
-              <li>📧 info@mk340tours.com</li>
-              <li>📍 กรุงเทพมหานคร</li>
-              <li>🕗 จันทร์-เสาร์ 9:00-18:00</li>
+              <li>โทร 081-234-5678</li>
+              <li>อีเมล info@travietours.com</li>
+              <li>กรุงเทพมหานคร</li>
+              <li>จันทร์-เสาร์ 9:00-18:00</li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 pt-6 text-center text-sm">
-          © 2026 MK340 Tours. All rights reserved.
+          © 2026 Travie Tours. All rights reserved.
         </div>
       </div>
     </footer>
