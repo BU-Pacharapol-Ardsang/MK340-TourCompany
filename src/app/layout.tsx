@@ -1,0 +1,29 @@
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import "./globals.css";
+
+const geistSans = localFont({
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+});
+
+export const metadata: Metadata = {
+  title: "MK340 Tours — ทัวร์ต่างประเทศ & ในประเทศ",
+  description:
+    "แพ็กเกจทัวร์คุณภาพ ราคาโปร่งใส ทั้งทัวร์ต่างประเทศและในประเทศ พร้อมไกด์ดูแลตลอดทริป",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="th">
+      <body className={`${geistSans.variable} font-sans antialiased`}>
+        {children}
+      </body>
+    </html>
+  );
+}
