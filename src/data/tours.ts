@@ -1,3 +1,8 @@
+export interface TourGalleryItem {
+  url: string;
+  caption?: string;
+}
+
 export interface Tour {
   id: string;
   title: string;
@@ -9,7 +14,7 @@ export interface Tour {
   price: number;
   originalPrice?: number;
   image: string;
-  gallery?: string[];
+  gallery?: TourGalleryItem[];
   highlights: string[];
   description: string;
   includes: string[];

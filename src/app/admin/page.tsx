@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Tour } from "@/data/tours";
 import BrandMark from "@/components/BrandMark";
+import AdminGalleryEditor from "@/components/admin/AdminGalleryEditor";
 import { getTours } from "@/lib/tours";
 import { deleteTourAction, saveTourAction } from "./actions";
 
@@ -21,10 +22,6 @@ function formatPrice(value: number) {
 
 function formatList(items: string[]) {
   return items.join("\n");
-}
-
-function formatGallery(items?: string[]) {
-  return (items ?? []).join("\n");
 }
 
 function formatItinerary(items: Tour["itinerary"]) {
@@ -97,37 +94,6 @@ function textareaClassName() {
   return `${inputClassName()} min-h-[120px] resize-y`;
 }
 
-function GalleryPreview({
-  images,
-  title,
-}: {
-  images: string[];
-  title: string;
-}) {
-  if (images.length === 0) {
-    return null;
-  }
-
-  return (
-    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-      {images.map((image, index) => (
-        <div
-          key={`${image}-${index}`}
-          className="relative aspect-[4/3] overflow-hidden rounded-[20px] border border-[color:var(--line)] bg-white/70"
-        >
-          <Image
-            src={image}
-            alt={`${title} gallery ${index + 1}`}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
-          />
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function TourForm({
   description,
   submitLabel,
@@ -143,7 +109,6 @@ function TourForm({
     <form action={saveTourAction} className="grid gap-5">
       <input type="hidden" name="originalId" defaultValue={tour?.id ?? ""} />
       <input type="hidden" name="currentImage" defaultValue={tour?.image ?? ""} />
-      <input type="hidden" name="currentGallery" defaultValue={formatGallery(gallery)} />
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <FieldShell
@@ -278,40 +243,7 @@ function TourForm({
         />
       </FieldShell>
 
-      <div className="grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
-        <FieldShell
-          label="Gallery URLs"
-          hint="หนึ่งบรรทัดต่อหนึ่งรูป ใช้ path local หรือ Blob URL ได้"
-        >
-          <textarea
-            name="galleryUrls"
-            defaultValue={formatGallery(gallery)}
-            className={`${textareaClassName()} min-h-[160px]`}
-          />
-        </FieldShell>
-
-        <FieldShell
-          label="Upload Gallery Images To Blob"
-          hint="เลือกได้หลายไฟล์ รูปที่อัปโหลดใหม่จะถูกต่อท้ายรายการ gallery เดิม"
-        >
-          <input
-            type="file"
-            name="galleryFiles"
-            accept="image/*"
-            multiple
-            className="block w-full rounded-[18px] border border-dashed border-[color:var(--line)] bg-white/55 px-4 py-3 text-sm text-[color:var(--muted)]"
-          />
-        </FieldShell>
-      </div>
-
-      {gallery.length > 0 ? (
-        <div className="grid gap-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--earth-deep)]">
-            Current Gallery
-          </p>
-          <GalleryPreview images={gallery} title={tour?.title ?? "Tour"} />
-        </div>
-      ) : null}
+      <AdminGalleryEditor initialItems={gallery} />
 
       <FieldShell label="Description">
         <textarea
@@ -546,7 +478,11 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                     <form action={deleteTourAction}>
                       <input type="hidden" name="id" value={tour.id} />
                       <input type="hidden" name="image" value={tour.image} />
-                      <input type="hidden" name="gallery" value={formatGallery(gallery)} />
+                      <input
+                        type="hidden"
+                        name="gallery"
+                        value={JSON.stringify(gallery)}
+                      />
                       <button
                         type="submit"
                         className="rounded-full border border-[rgba(143,115,102,0.24)] bg-[rgba(143,115,102,0.08)] px-5 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:-translate-y-0.5 hover:bg-[rgba(143,115,102,0.14)]"

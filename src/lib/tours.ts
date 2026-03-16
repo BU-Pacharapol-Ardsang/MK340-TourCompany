@@ -1,7 +1,11 @@
 import "server-only";
 
 import { cache } from "react";
-import { tours as fallbackTours, type Tour } from "@/data/tours";
+import {
+  tours as fallbackTours,
+  type Tour,
+  type TourGalleryItem,
+} from "@/data/tours";
 import { ensureToursSchema, getToursSql } from "./tours-schema";
 
 type TourRow = {
@@ -27,6 +31,38 @@ function parseStringArray(value: unknown) {
   const parsed = parseJsonValue<unknown[]>(value, []);
 
   return parsed.filter((item): item is string => typeof item === "string");
+}
+
+function parseGallery(value: unknown): TourGalleryItem[] {
+  const parsed = parseJsonValue<unknown[]>(value, []);
+  const items: TourGalleryItem[] = [];
+
+  for (const item of parsed) {
+    if (typeof item === "string") {
+      items.push({
+        url: item,
+        caption: "",
+      });
+      continue;
+    }
+
+    if (!item || typeof item !== "object") {
+      continue;
+    }
+
+    const candidate = item as Record<string, unknown>;
+
+    if (typeof candidate.url !== "string") {
+      continue;
+    }
+
+    items.push({
+      url: candidate.url,
+      caption: typeof candidate.caption === "string" ? candidate.caption : "",
+    });
+  }
+
+  return items;
 }
 
 function parseItinerary(value: unknown): Tour["itinerary"] {
@@ -76,7 +112,7 @@ function parseJsonValue<T>(value: unknown, fallback: T) {
 function normalizeTour(tour: Tour): Tour {
   return {
     ...tour,
-    gallery: tour.gallery ?? [],
+    gallery: parseGallery(tour.gallery ?? []),
   };
 }
 
@@ -92,7 +128,7 @@ function mapTourRow(row: TourRow): Tour {
     price: Number(row.price),
     originalPrice: row.original_price ?? undefined,
     image: row.image,
-    gallery: parseStringArray(row.gallery),
+    gallery: parseGallery(row.gallery),
     highlights: parseStringArray(row.highlights),
     description: row.description,
     includes: parseStringArray(row.includes),

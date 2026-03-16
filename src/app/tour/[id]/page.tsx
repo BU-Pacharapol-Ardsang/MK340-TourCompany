@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BrandMark from "@/components/BrandMark";
+import TourGallery from "@/components/TourGallery";
 import { getTourById } from "@/lib/tours";
 
 export const revalidate = 300;
@@ -174,42 +175,7 @@ export default async function TourDetailPage({
                 </div>
               </section>
 
-              {gallery.length > 0 && (
-                <section className="soft-card rounded-[34px] p-7 sm:p-8">
-                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--earth-deep)]">
-                    Gallery
-                  </p>
-                  <h2 className="mt-3 font-display text-4xl text-[color:var(--foreground)]">
-                    ภาพบรรยากาศของทริป
-                  </h2>
-                  <p className="mt-3 max-w-2xl text-sm leading-7 text-[color:var(--muted)] sm:text-base">
-                    ภาพชุดนี้ช่วยให้เห็น mood ของเส้นทางและสถานที่สำคัญก่อนเลื่อนลงไปดูโปรแกรมการเดินทางแบบวันต่อวัน
-                  </p>
-
-                  <div className="mt-7 grid auto-rows-[170px] gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                    {gallery.map((image, index) => (
-                      <div
-                        key={`${image}-${index}`}
-                        className={`relative overflow-hidden rounded-[26px] border border-[color:var(--line)] bg-white/60 ${
-                          index === 0 ? "sm:col-span-2 sm:row-span-2 min-h-[280px]" : ""
-                        }`}
-                      >
-                        <Image
-                          src={image}
-                          alt={`${tour.title} gallery ${index + 1}`}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
-                        />
-                        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,250,245,0.04),rgba(44,36,32,0.28))]" />
-                        <div className="absolute left-4 top-4 rounded-full bg-white/82 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--foreground)] backdrop-blur">
-                          Spot {index + 1}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              )}
+              {gallery.length > 0 && <TourGallery items={gallery} title={tour.title} />}
 
               <section className="soft-card rounded-[34px] p-7 sm:p-8">
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--earth-deep)]">

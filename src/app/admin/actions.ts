@@ -5,6 +5,7 @@ import { neon } from "@neondatabase/serverless";
 import { del, put } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import type { TourGalleryItem } from "@/data/tours";
 import { getBlobReadWriteToken, requireDatabaseUrl } from "@/lib/env";
 import { ensureToursSchema } from "@/lib/tours-schema";
 
@@ -12,6 +13,18 @@ const sql = neon(requireDatabaseUrl());
 
 type TourType = "domestic" | "international";
 type AdminRedirectStatus = "saved" | "deleted" | "error";
+
+type GalleryFormItem =
+  | {
+      kind: "url";
+      url: string;
+      caption: string;
+    }
+  | {
+      kind: "file";
+      fileKey: string;
+      caption: string;
+    };
 
 function getString(formData: FormData, key: string) {
   const value = formData.get(key);
@@ -118,16 +131,110 @@ function validateImageUrl(value: string) {
   );
 }
 
-function parseImageList(value: string) {
-  return uniqueValues(parseList(value).map(validateImageUrl));
-}
-
 function sanitizeFileNameSegment(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "");
 }
 
-function uniqueValues<T>(values: T[]) {
-  return Array.from(new Set(values));
+function uniqueGalleryItems(items: TourGalleryItem[]) {
+  const seenUrls = new Set<string>();
+  const normalizedItems: TourGalleryItem[] = [];
+
+  for (let index = 0; index < items.length; index += 1) {
+    const url = validateImageUrl(items[index].url);
+
+    if (!url || seenUrls.has(url)) {
+      continue;
+    }
+
+    seenUrls.add(url);
+    normalizedItems.push({
+      url,
+      caption: items[index].caption?.trim() ?? "",
+    });
+  }
+
+  return normalizedItems;
+}
+
+function parseGalleryValue(value: string) {
+  if (!value) {
+    return [];
+  }
+
+  let parsed: unknown;
+
+  try {
+    parsed = JSON.parse(value);
+  } catch {
+    throw new Error("Gallery payload is invalid JSON");
+  }
+
+  if (!Array.isArray(parsed)) {
+    throw new Error("Gallery payload must be an array");
+  }
+
+  return parsed;
+}
+
+function parseStoredGallery(value: string) {
+  const items: TourGalleryItem[] = [];
+
+  for (const item of parseGalleryValue(value)) {
+    if (typeof item === "string") {
+      items.push({
+        url: item,
+        caption: "",
+      });
+      continue;
+    }
+
+    if (!item || typeof item !== "object") {
+      continue;
+    }
+
+    const candidate = item as Record<string, unknown>;
+
+    if (typeof candidate.url !== "string") {
+      continue;
+    }
+
+    items.push({
+      url: candidate.url,
+      caption: typeof candidate.caption === "string" ? candidate.caption : "",
+    });
+  }
+
+  return uniqueGalleryItems(items);
+}
+
+function parseGalleryFormItems(value: string) {
+  return parseGalleryValue(value)
+    .map((item) => {
+      if (!item || typeof item !== "object") {
+        return null;
+      }
+
+      const candidate = item as Record<string, unknown>;
+
+      if (candidate.kind === "url" && typeof candidate.url === "string") {
+        return {
+          kind: "url" as const,
+          url: candidate.url,
+          caption: typeof candidate.caption === "string" ? candidate.caption : "",
+        };
+      }
+
+      if (candidate.kind === "file" && typeof candidate.fileKey === "string") {
+        return {
+          kind: "file" as const,
+          fileKey: candidate.fileKey,
+          caption: typeof candidate.caption === "string" ? candidate.caption : "",
+        };
+      }
+
+      return null;
+    })
+    .filter((item): item is GalleryFormItem => item !== null);
 }
 
 async function uploadBlobFile(file: File, pathname: string) {
@@ -162,24 +269,31 @@ async function maybeUploadImage(formData: FormData, id: string) {
   return uploadBlobFile(fileEntry, pathname);
 }
 
-async function maybeUploadGalleryImages(formData: FormData, id: string) {
-  const entries = formData.getAll("galleryFiles");
-  const safeId = sanitizeFileNameSegment(id) || `tour-${Date.now()}`;
-  const uploads: string[] = [];
+async function uploadGalleryFiles(formData: FormData, id: string) {
+  const fileKeys = formData
+    .getAll("galleryFileKeys")
+    .filter((entry): entry is string => typeof entry === "string");
+  const files = formData
+    .getAll("galleryFiles")
+    .filter((entry): entry is File => entry instanceof File && entry.size > 0);
 
-  for (let index = 0; index < entries.length; index += 1) {
-    const entry = entries[index];
-
-    if (!(entry instanceof File) || entry.size === 0) {
-      continue;
-    }
-
-    const extension = path.extname(entry.name) || ".bin";
-    const pathname = `tours/admin/gallery/${safeId}-${Date.now()}-${index}${extension.toLowerCase()}`;
-    uploads.push(await uploadBlobFile(entry, pathname));
+  if (fileKeys.length !== files.length) {
+    throw new Error("Gallery uploads are out of sync. Please try selecting the files again.");
   }
 
-  return uploads;
+  const uploadedUrls = new Map<string, string>();
+  const safeId = sanitizeFileNameSegment(id) || `tour-${Date.now()}`;
+
+  for (let index = 0; index < files.length; index += 1) {
+    const file = files[index];
+    const fileKey = fileKeys[index];
+    const extension = path.extname(file.name) || ".bin";
+    const pathname = `tours/admin/gallery/${safeId}-${Date.now()}-${index}${extension.toLowerCase()}`;
+    const url = await uploadBlobFile(file, pathname);
+    uploadedUrls.set(fileKey, url);
+  }
+
+  return uploadedUrls;
 }
 
 async function cleanupBlob(url: string) {
@@ -273,15 +387,15 @@ export async function saveTourAction(formData: FormData) {
 
   const originalId = getString(formData, "originalId");
   let currentImage = "";
-  let currentGallery: string[] = [];
+  let currentGallery: TourGalleryItem[] = [];
   let id = "";
   let uploadedImageUrl: string | null = null;
-  let uploadedGalleryUrls: string[] = [];
+  let uploadedGalleryUrls = new Map<string, string>();
   let successRedirectUrl = "";
 
   try {
     currentImage = validateImageUrl(getString(formData, "currentImage"));
-    currentGallery = parseImageList(getString(formData, "currentGallery"));
+    currentGallery = parseStoredGallery(getString(formData, "currentGallery"));
     id = getRequiredString(formData, "id", "slug / id");
     const title = getRequiredString(formData, "title", "title");
     const destination = getRequiredString(formData, "destination", "destination");
@@ -299,13 +413,12 @@ export async function saveTourAction(formData: FormData) {
     const includes = parseList(getString(formData, "includes"));
     const itinerary = parseItinerary(getString(formData, "itinerary"));
     const imageUrl = validateImageUrl(getString(formData, "imageUrl"));
-    const galleryUrls = parseImageList(getString(formData, "galleryUrls"));
+    const galleryItems = parseGalleryFormItems(getString(formData, "galleryItems"));
 
     uploadedImageUrl = await maybeUploadImage(formData, id);
-    uploadedGalleryUrls = await maybeUploadGalleryImages(formData, id);
+    uploadedGalleryUrls = await uploadGalleryFiles(formData, id);
 
     const image = uploadedImageUrl || imageUrl || currentImage;
-    const gallery = uniqueValues([...galleryUrls, ...uploadedGalleryUrls]);
 
     if (!image) {
       throw new Error("Image is required. Provide a Blob upload or an existing path.");
@@ -318,6 +431,28 @@ export async function saveTourAction(formData: FormData) {
     if (originalPrice !== null && originalPrice < price) {
       throw new Error("originalPrice should be greater than or equal to price");
     }
+
+    const gallery = uniqueGalleryItems(
+      galleryItems.map((item) => {
+        if (item.kind === "url") {
+          return {
+            url: item.url,
+            caption: item.caption,
+          };
+        }
+
+        const uploadedUrl = uploadedGalleryUrls.get(item.fileKey);
+
+        if (!uploadedUrl) {
+          throw new Error("Missing uploaded gallery file. Please select the files again.");
+        }
+
+        return {
+          url: uploadedUrl,
+          caption: item.caption,
+        };
+      }),
+    );
 
     const existingId = await getExistingTourId(id);
 
@@ -401,21 +536,19 @@ export async function saveTourAction(formData: FormData) {
       await cleanupBlob(currentImage);
     }
 
-    const removedGallery = currentGallery.filter(
-      (url) => !gallery.includes(url) && url !== image,
-    );
+    const removedGalleryUrls = currentGallery
+      .map((item) => item.url)
+      .filter((url) => !gallery.some((galleryItem) => galleryItem.url === url) && url !== image);
 
-    await cleanupBlobs(removedGallery);
+    await cleanupBlobs(removedGalleryUrls);
 
     revalidateTourPaths(id, originalId || undefined);
     successRedirectUrl = buildAdminRedirectUrl("saved", { id });
   } catch (error) {
-    const uploadedUrls = [
+    await cleanupBlobs([
       ...(uploadedImageUrl ? [uploadedImageUrl] : []),
-      ...uploadedGalleryUrls,
-    ];
-
-    await cleanupBlobs(uploadedUrls);
+      ...Array.from(uploadedGalleryUrls.values()),
+    ]);
 
     redirect(
       buildAdminRedirectUrl("error", {
@@ -433,14 +566,16 @@ export async function deleteTourAction(formData: FormData) {
 
   const id = getRequiredString(formData, "id", "id");
   const image = validateImageUrl(getString(formData, "image"));
-  const gallery = parseImageList(getString(formData, "gallery"));
+  const gallery = parseStoredGallery(getString(formData, "gallery"));
 
   await sql`
     DELETE FROM tours
     WHERE id = ${id}
   `;
 
-  await cleanupBlobs(uniqueValues([image, ...gallery].filter(Boolean)));
+  await cleanupBlobs(
+    Array.from(new Set([image, ...gallery.map((item) => item.url)].filter(Boolean))),
+  );
 
   revalidateTourPaths(id);
   redirect(buildAdminRedirectUrl("deleted", { id }));
