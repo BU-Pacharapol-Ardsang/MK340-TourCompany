@@ -130,20 +130,7 @@ export default async function TourDetailPage({
                   </a>
                 </div>
 
-                <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                  {[
-                    "โทนอุ่นและผ่อนคลาย",
-                    "ข้อมูลชัดเจนใช้งานจริง",
-                    "ภาพรวมสอดคล้องกับแบรนด์",
-                  ].map((item) => (
-                    <div
-                      key={item}
-                      className="rounded-full border border-[color:var(--line)] bg-white/65 px-4 py-3 text-center text-xs font-medium text-[color:var(--foreground)]"
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
+                
               </div>
             </div>
           </section>

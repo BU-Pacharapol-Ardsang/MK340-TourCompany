@@ -5,7 +5,7 @@ export default function ContactCTA() {
         <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
           <div>
             <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--earth-deep)]">
-              Contact Studio
+              Contact
             </span>
             <h2 className="mt-4 font-display text-4xl leading-tight text-[color:var(--foreground)] sm:text-5xl">
               พร้อมวางแผนทริปที่จังหวะพอดีกับลูกค้าแล้วหรือยัง
