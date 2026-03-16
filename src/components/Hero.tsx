@@ -27,8 +27,8 @@ export default function Hero() {
         <div className="glass-panel max-w-3xl rounded-[38px] p-7 sm:p-10">
           <div className="flex flex-wrap items-center gap-4">
             <BrandMark size="sm" showWordmark />
-            <span className="rounded-full border border-[color:var(--line)] bg-white/60 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[color:var(--earth-deep)]">
-              Brand Identity Driven
+            <span className="rounded-full border border-[color:var(--line)] bg-white/60 px-4 py-2 text-xs font-semibold uppercase tracking-[0.08em] text-[color:var(--earth-deep)]">
+              ไม่ใช้เว็บขายทัวร์จริงๆ เป็นแค่โปรเจกต์ของสถานศึกษาเท่านั้น
             </span>
           </div>
 
@@ -85,14 +85,13 @@ export default function Hero() {
         <div className="hidden self-end lg:block">
           <div className="rounded-[34px] border border-white/20 bg-white/10 p-5 backdrop-blur-md">
             <p className="text-xs font-semibold uppercase tracking-[0.26em] text-white/80">
-              Signature Tone
+              Brand Philosophy
             </p>
             <p className="mt-3 font-display text-4xl leading-tight text-white">
-              Soft
+              Travel softly
               <br />
-              Earthy
-              <br />
-              Calm
+              remember deeply
+              
             </p>
           </div>
         </div>

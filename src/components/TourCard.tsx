@@ -57,7 +57,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
             {getTripPaceLabel(tour.days)}
           </span>
           {savings > 0 ? (
-            <span className="rounded-full bg-[rgba(186,160,216,0.18)] px-3 py-1 text-xs font-semibold text-[color:var(--lavender-deep)]">
+            <span className="rounded-full bg-[color:var(--price-accent-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--price-accent)]">
               ประหยัด ฿{formatPrice(savings)}
             </span>
           ) : (
@@ -83,7 +83,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
                 ฿{formatPrice(tour.originalPrice)}
               </p>
             )}
-            <p className="font-display text-4xl leading-none text-[color:var(--foreground)]">
+            <p className="font-display text-4xl leading-none text-[color:var(--price-accent)]">
               ฿{formatPrice(tour.price)}
             </p>
             <span className="text-xs text-[color:var(--muted)]">ต่อท่าน</span>

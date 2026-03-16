@@ -83,8 +83,8 @@ export default async function TourDetailPage({
                 </p>
 
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-[30px] border border-[color:var(--line)] bg-white/70 px-5 py-5">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--earth-deep)]">
+                  <div className="rounded-[30px] border border-[rgba(142,75,75,0.18)] bg-[color:var(--price-accent-soft)] px-5 py-5">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--price-accent)]">
                       ราคาเริ่มต้น
                     </p>
                     {tour.originalPrice && (
@@ -92,7 +92,7 @@ export default async function TourDetailPage({
                         ฿{formatPrice(tour.originalPrice)}
                       </p>
                     )}
-                    <p className="font-display text-5xl leading-none text-[color:var(--foreground)]">
+                    <p className="font-display text-5xl leading-none text-[color:var(--price-accent)]">
                       ฿{formatPrice(tour.price)}
                     </p>
                     <p className="mt-2 text-sm text-[color:var(--muted)]">ต่อท่าน</p>

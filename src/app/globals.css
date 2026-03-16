@@ -14,6 +14,8 @@
   --earth-deep: #8f7366;
   --lavender: #baa0d8;
   --lavender-deep: #7b6584;
+  --price-accent: #8e4b4b;
+  --price-accent-soft: rgba(142, 75, 75, 0.14);
   --cream: #eee0d0;
   --shadow-soft: 0 30px 90px -42px rgba(88, 63, 58, 0.42);
   --font-display:
@@ -35,27 +37,11 @@ body {
   background:
     radial-gradient(circle at top left, rgba(228, 212, 191, 0.72), transparent 30%),
     radial-gradient(circle at top right, rgba(197, 176, 218, 0.42), transparent 28%),
+    radial-gradient(circle at 82% 84%, rgba(188, 162, 220, 0.14), transparent 24%),
     linear-gradient(180deg, #f9f6f1 0%, #f5efe8 48%, #efe7de 100%);
   font-family: var(--font-geist-sans), "Aptos", "Segoe UI", sans-serif;
   min-height: 100vh;
   text-rendering: optimizeLegibility;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: auto 7% 8% auto;
-  height: 18rem;
-  width: 18rem;
-  border-radius: 999px;
-  background: radial-gradient(
-    circle,
-    rgba(188, 162, 220, 0.22),
-    rgba(188, 162, 220, 0)
-  );
-  filter: blur(8px);
-  pointer-events: none;
-  z-index: -1;
 }
 
 a {

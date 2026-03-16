@@ -40,7 +40,7 @@ export default function Navbar() {
               scrolled ? "text-[color:var(--muted)]" : "text-[color:#5f514c]"
             }`}
           >
-            Soft Journey Studio
+            Travel softly, remember deeply.
           </span>
         </Link>
 
