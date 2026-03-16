@@ -27,7 +27,7 @@ export const tours: Tour[] = [
     nights: 4,
     price: 35900,
     originalPrice: 42900,
-    image: "/images/images (5).jpg",
+    image: "/images/japan-tokyo-osaka.jpg",
     tag: "ขายดี",
     highlights: [
       "ชมซากุระ ณ สวนอุเอโนะ",
@@ -88,7 +88,7 @@ export const tours: Tour[] = [
     nights: 3,
     price: 24900,
     originalPrice: 29900,
-    image: "/images/images (6).jpg",
+    image: "/images/korea-seoul-nami-island.jpg",
     tag: "โปรใหม่",
     highlights: [
       "พระราชวังเคียงบกกุง",
@@ -131,7 +131,7 @@ export const tours: Tour[] = [
     days: 8,
     nights: 6,
     price: 79900,
-    image: "/images/images (7).jpg",
+    image: "/images/europe-swiss-france.jpg",
     highlights: [
       "ยอดเขายุงเฟรา",
       "ล่องเรือทะเลสาบลูเซิร์น",
@@ -170,7 +170,7 @@ export const tours: Tour[] = [
     nights: 3,
     price: 8900,
     originalPrice: 11900,
-    image: "/images/thailand-top-tourist-attractions-in-the-world-w.webp",
+    image: "/images/chiang-mai-doi-inthanon.webp",
     tag: "สุดคุ้ม",
     highlights: [
       "ดอยอินทนนท์ จุดสูงสุดของไทย",
@@ -207,7 +207,7 @@ export const tours: Tour[] = [
     days: 3,
     nights: 2,
     price: 6500,
-    image: "/images/pcv9ubnkbagpy3uj68ld.jpg",
+    image: "/images/krabi-four-islands.jpg",
     highlights: [
       "ทะเลแหวก Unseen Thailand",
       "เกาะปอดะ หาดทรายขาว",
@@ -244,7 +244,7 @@ export const tours: Tour[] = [
     nights: 4,
     price: 18900,
     originalPrice: 22900,
-    image: "/images/73xOjfHu1ny3RYEw7LVp.webp",
+    image: "/images/vietnam-halong-bay.webp",
     tag: "แนะนำ",
     highlights: [
       "ล่องเรืออ่าวฮาลอง",

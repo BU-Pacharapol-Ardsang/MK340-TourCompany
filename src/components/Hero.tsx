@@ -1,17 +1,24 @@
-import Image from "next/image";
 import BrandMark from "./BrandMark";
+
+const heroVideoUrl =
+  process.env.NEXT_PUBLIC_HERO_VIDEO_URL?.trim() ||
+  "https://rxldxotfic8tqsrr.public.blob.vercel-storage.com/page-header/mainpage-header.mp4";
 
 export default function Hero() {
   return (
     <section className="relative overflow-hidden px-6 pb-16 pt-32 sm:pb-24 sm:pt-36">
-      <Image
-        src="/images/73xOjfHu1ny3RYEw7LVp.webp"
-        alt="บรรยากาศธรรมชาติสำหรับภาพลักษณ์ของแบรนด์"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center"
-      />
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster="/images/vietnam-halong-bay.webp"
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      >
+        <source src={heroVideoUrl} type="video/mp4" />
+      </video>
 
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(39,28,26,0.72)_0%,rgba(73,54,57,0.48)_38%,rgba(246,240,233,0.16)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(194,173,220,0.32),transparent_26%),radial-gradient(circle_at_left_center,rgba(228,212,191,0.28),transparent_30%)]" />

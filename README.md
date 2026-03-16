@@ -18,6 +18,7 @@ npm run dev
 ```bash
 STORAGE_URL=
 BLOB_READ_WRITE_TOKEN=
+NEXT_PUBLIC_HERO_VIDEO_URL=
 ```
 
 หมายเหตุ:
@@ -25,6 +26,7 @@ BLOB_READ_WRITE_TOKEN=
 - ฝั่งฐานข้อมูลรองรับชื่อ env หลายแบบ เช่น `STORAGE_URL`, `DATABASE_URL`, `POSTGRES_URL`
 - ถ้าคุณใช้ prefix ตามภาพใน Vercel ตอนนี้ให้ใส่ `STORAGE_URL`
 - `BLOB_READ_WRITE_TOKEN` ใช้ตอน seed รูปขึ้น Blob ถ้าไม่ใส่ ระบบจะเก็บ path local เดิมไว้แทน
+- `NEXT_PUBLIC_HERO_VIDEO_URL` ใช้สำหรับ hero background video ที่ host แยกไว้บน Blob/CDN
 
 ## Initial Seed
 
@@ -61,7 +63,7 @@ npm run db:seed
 - `src/lib/tours.ts` server data layer สำหรับโหลดทัวร์จาก Neon
 - `scripts/seed-tours.ts` seed script สำหรับสร้างตารางและย้ายข้อมูลขึ้น Neon/Blob
 - `public` static assets ของแอป
-- `reference-assets` รูปและภาพอ้างอิงที่ยังไม่ผูกเข้ากับแอปโดยตรง
+- `archive/reference-assets` รูปและภาพอ้างอิงที่ไม่ได้ใช้ใน runtime แล้ว
 - `archive/legacy-tour-app` สำเนาโครงสร้างเดิมจากโฟลเดอร์ `tour-app`
 
 ## Notes

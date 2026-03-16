@@ -5,7 +5,7 @@ export default function Hero() {
     <section className="relative h-[92vh] min-h-[600px] flex items-center overflow-hidden">
       {/* Background image */}
       <Image
-        src="/images/73xOjfHu1ny3RYEw7LVp.webp"
+        src="/images/vietnam-halong-bay.webp"
         alt="Tour destination cover"
         fill
         className="object-cover"
