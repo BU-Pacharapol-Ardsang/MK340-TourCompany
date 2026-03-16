@@ -9,9 +9,17 @@ const geistSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Travie Tours — ทัวร์ต่างประเทศ & ในประเทศ",
+  title: "Travie Tour | ทริปโทนอุ่น เลือกง่าย เดินทางสบาย",
   description:
-    "แพ็กเกจทัวร์คุณภาพ ราคาโปร่งใส ทั้งทัวร์ต่างประเทศและในประเทศ พร้อมทีมดูแลตลอดการเดินทาง",
+    "แพ็กเกจทัวร์ในประเทศและต่างประเทศที่คัดเส้นทางให้จังหวะการเดินทางสบายขึ้น พร้อมบริการอบอุ่น ราคาโปร่งใส และทีมดูแลตลอดทริป",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/logo/travie-logo.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/logo/travie-logo.png",
+  },
 };
 
 export default function RootLayout({

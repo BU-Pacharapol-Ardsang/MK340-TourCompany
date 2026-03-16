@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import BrandMark from "./BrandMark";
 
 const navLinks = [
-  { href: "#packages", label: "แพ็กเกจทัวร์" },
-  { href: "#why-us", label: "ทำไมต้องเรา" },
-  { href: "#contact", label: "ติดต่อ" },
+  { href: "#packages", label: "แพ็กเกจ" },
+  { href: "#why-us", label: "เหตุผลที่เลือกเรา" },
+  { href: "#contact", label: "ปรึกษาทริป" },
 ];
 
 export default function Navbar() {
@@ -22,20 +23,24 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${
-        scrolled ? "bg-white/95 shadow-md backdrop-blur" : "bg-transparent"
+        scrolled ? "px-4 py-3" : "px-4 py-5"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div
+        className={`mx-auto flex max-w-7xl items-center justify-between rounded-full border px-5 transition-all duration-300 sm:px-6 ${
+          scrolled
+            ? "glass-panel border-[color:var(--line)] py-3"
+            : "border-transparent bg-white/20 py-3 backdrop-blur-md"
+        }`}
+      >
         <Link href="/" className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-sm font-extrabold text-white shadow-lg shadow-blue-600/25">
-            TT
-          </span>
+          <BrandMark size="sm" showWordmark />
           <span
-            className={`text-xl font-bold tracking-tight transition-colors ${
-              scrolled ? "text-blue-700" : "text-white"
+            className={`hidden text-xs uppercase tracking-[0.32em] transition-colors sm:block ${
+              scrolled ? "text-[color:var(--muted)]" : "text-[color:#5f514c]"
             }`}
           >
-            Travie <span className="font-light">Tours</span>
+            Soft Journey Studio
           </span>
         </Link>
 
@@ -44,8 +49,8 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-blue-500 ${
-                scrolled ? "text-gray-700" : "text-white/90"
+              className={`text-sm font-medium transition-colors hover:text-[color:var(--lavender-deep)] ${
+                scrolled ? "text-[color:var(--foreground)]" : "text-[color:#4f423d]"
               }`}
             >
               {link.label}
@@ -55,9 +60,9 @@ export default function Navbar() {
             href="https://line.me"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-green-500 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:scale-105 hover:bg-green-600"
+            className="rounded-full bg-[color:var(--lavender-deep)] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
           >
-            แชตเลย
+            คุยแผนทริป
           </a>
         </div>
 
@@ -70,7 +75,7 @@ export default function Navbar() {
             <span
               key={i}
               className={`block h-0.5 w-6 rounded transition-colors ${
-                scrolled ? "bg-gray-800" : "bg-white"
+                scrolled ? "bg-[color:var(--foreground)]" : "bg-[color:#5b4d48]"
               }`}
             />
           ))}
@@ -78,14 +83,14 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="border-t bg-white shadow-lg md:hidden">
+        <div className="mx-4 mt-3 rounded-[28px] border border-[color:var(--line)] bg-[color:var(--surface)] shadow-[0_24px_64px_-42px_rgba(88,63,58,0.55)] md:hidden">
           <div className="flex flex-col gap-4 px-6 py-4">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="font-medium text-gray-700"
+                className="font-medium text-[color:var(--foreground)]"
               >
                 {link.label}
               </a>
@@ -94,9 +99,9 @@ export default function Navbar() {
               href="https://line.me"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-green-500 px-5 py-2.5 text-center font-semibold text-white"
+              className="rounded-full bg-[color:var(--lavender-deep)] px-5 py-2.5 text-center font-semibold text-white"
             >
-              แชตเลย
+              คุยแผนทริป
             </a>
           </div>
         </div>

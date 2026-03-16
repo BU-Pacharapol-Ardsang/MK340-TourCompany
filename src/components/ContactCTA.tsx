@@ -1,41 +1,66 @@
 export default function ContactCTA() {
   return (
-    <section
-      id="contact"
-      className="py-20 bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 text-white"
-    >
-      <div className="max-w-4xl mx-auto px-6 text-center">
-        <h2 className="text-3xl sm:text-4xl font-extrabold mb-4">
-          พร้อมออกเดินทางหรือยัง?
-        </h2>
-        <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
-          ทักหาเราได้เลย! ทีมงานพร้อมช่วยวางแผนทริปในฝันให้คุณ ปรึกษาฟรีไม่มีค่าใช้จ่าย
-        </p>
+    <section id="contact" className="px-6 py-24">
+      <div className="glass-panel mx-auto max-w-6xl overflow-hidden rounded-[38px] p-8 sm:p-10">
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--earth-deep)]">
+              Contact Studio
+            </span>
+            <h2 className="mt-4 font-display text-4xl leading-tight text-[color:var(--foreground)] sm:text-5xl">
+              พร้อมวางแผนทริปที่จังหวะพอดีกับลูกค้าแล้วหรือยัง
+            </h2>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-[color:var(--muted)]">
+              คุยกับทีมได้เลยถ้าต้องการปรับโปรแกรม เลือกช่วงงบ
+              หรือหาทริปที่ภาพรวมดูนุ่มนวลและขายง่ายขึ้น เราช่วยวางโทนให้ตั้งแต่หน้าเว็บจนถึงหน้าแพ็กเกจได้
+            </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="https://line.me"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-4 rounded-xl transition-all hover:scale-105 hover:shadow-lg"
-          >
-            <span className="text-xl">💬</span>
-            แอดไลน์สอบถาม
-          </a>
-          <a
-            href="tel:0812345678"
-            className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur text-white font-semibold px-8 py-4 rounded-xl border border-white/30 transition-all"
-          >
-            <span className="text-xl">📞</span>
-            โทร 081-234-5678
-          </a>
-        </div>
+            <div className="mt-8 flex flex-wrap gap-3 text-sm text-[color:var(--muted)]">
+              <span className="rounded-full bg-white/70 px-4 py-2">
+                ใบอนุญาตนำเที่ยว
+              </span>
+              <span className="rounded-full bg-white/70 px-4 py-2">
+                ปรึกษาฟรี
+              </span>
+              <span className="rounded-full bg-white/70 px-4 py-2">
+                ปรับแพ็กเกจได้
+              </span>
+            </div>
+          </div>
 
-        {/* Trust badges */}
-        <div className="flex flex-wrap justify-center gap-6 mt-14 text-white/60 text-sm">
-          <span>✅ ใบอนุญาตนำเที่ยว TAT</span>
-          <span>✅ ประกันการเดินทาง</span>
-          <span>✅ ชำระผ่อนได้</span>
+          <div className="grid gap-4">
+            <a
+              href="https://line.me"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-[30px] bg-[rgba(123,101,132,0.94)] px-6 py-6 text-white transition-all hover:-translate-y-1"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                LINE
+              </p>
+              <p className="mt-2 font-display text-3xl leading-none">
+                แอดไลน์สอบถาม
+              </p>
+              <p className="mt-3 text-sm text-white/80">
+                คุยรายละเอียดทริป โปรโมชั่น และช่วงวันเดินทางได้ทันที
+              </p>
+            </a>
+
+            <a
+              href="tel:0812345678"
+              className="soft-card rounded-[30px] px-6 py-6 transition-all hover:-translate-y-1"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--earth-deep)]">
+                Phone
+              </p>
+              <p className="mt-2 font-display text-3xl leading-none text-[color:var(--foreground)]">
+                081-234-5678
+              </p>
+              <p className="mt-3 text-sm text-[color:var(--muted)]">
+                สำหรับลูกค้าที่ต้องการคุยรายละเอียดแบบรวดเร็วหรือจองทริปทันที
+              </p>
+            </a>
+          </div>
         </div>
       </div>
     </section>

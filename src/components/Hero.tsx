@@ -1,75 +1,93 @@
 import Image from "next/image";
+import BrandMark from "./BrandMark";
 
 export default function Hero() {
   return (
-    <section className="relative h-[92vh] min-h-[600px] flex items-center overflow-hidden">
-      {/* Background image */}
+    <section className="relative overflow-hidden px-6 pb-16 pt-32 sm:pb-24 sm:pt-36">
       <Image
         src="/images/73xOjfHu1ny3RYEw7LVp.webp"
-        alt="Tour destination cover"
+        alt="บรรยากาศธรรมชาติสำหรับภาพลักษณ์ของแบรนด์"
         fill
-        className="object-cover"
         priority
-        quality={85}
+        sizes="100vw"
+        className="object-cover object-center"
       />
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(39,28,26,0.72)_0%,rgba(73,54,57,0.48)_38%,rgba(246,240,233,0.16)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(194,173,220,0.32),transparent_26%),radial-gradient(circle_at_left_center,rgba(228,212,191,0.28),transparent_30%)]" />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
-        <div className="max-w-2xl">
-          <span className="inline-block bg-blue-600/90 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm">
-            🌏 ทัวร์ต่างประเทศ &amp; ในประเทศ
-          </span>
+      <div className="relative mx-auto grid min-h-[78vh] max-w-7xl items-center gap-8 lg:grid-cols-[1fr_0.34fr]">
+        <div className="glass-panel max-w-3xl rounded-[38px] p-7 sm:p-10">
+          <div className="flex flex-wrap items-center gap-4">
+            <BrandMark size="sm" showWordmark />
+            <span className="rounded-full border border-[color:var(--line)] bg-white/60 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[color:var(--earth-deep)]">
+              Brand Identity Driven
+            </span>
+          </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4">
-            ออกเดินทาง
+          <h1 className="mt-8 font-display text-5xl leading-[0.95] tracking-[-0.04em] text-[color:var(--foreground)] sm:text-6xl lg:text-[5.2rem]">
+            Travel
+            <span className="ml-3 font-script text-[color:var(--lavender-deep)]">
+              ที่นุ่มนวล
+            </span>
             <br />
-            <span className="text-blue-400">สร้างความทรงจำ</span>
+            เรียบง่าย และน่าจดจำ
           </h1>
 
-          <p className="text-lg sm:text-xl text-white/80 mb-8 leading-relaxed max-w-lg">
-            แพ็กเกจทัวร์คุณภาพ ราคาโปร่งใส พร้อมไกด์ดูแลตลอดทริป
-            <br className="hidden sm:block" />
-            เลือกทริปที่ใช่ แล้วออกเดินทางกันเลย!
+          <p className="mt-6 max-w-2xl text-base leading-8 text-[color:var(--muted)] sm:text-lg">
+            ภาพลักษณ์ของแบรนด์ถูกแปลงเป็นหน้าเว็บที่ดูอบอุ่น พรีเมียม และสบายตา
+            พร้อมยังคงฟังก์ชันการขายทัวร์และการเลือกแพ็กเกจให้ใช้งานได้จริง
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <a
               href="#packages"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl text-center transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-600/30"
+              className="inline-flex items-center justify-center rounded-full bg-[color:var(--lavender-deep)] px-8 py-4 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
             >
               ดูแพ็กเกจทั้งหมด
             </a>
             <a
               href="#contact"
-              className="border-2 border-white/40 hover:border-white text-white font-semibold px-8 py-4 rounded-xl text-center transition-all hover:bg-white/10"
+              className="inline-flex items-center justify-center rounded-full border border-[color:var(--line)] bg-white/60 px-8 py-4 text-sm font-semibold text-[color:var(--foreground)] transition-all hover:-translate-y-0.5 hover:bg-white"
             >
-              ปรึกษาฟรี
+              ปรึกษาทริปฟรี
             </a>
           </div>
 
-          {/* Quick stats */}
-          <div className="flex gap-8 mt-12">
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
-              { value: "500+", label: "ทริปสำเร็จ" },
-              { value: "15K+", label: "ลูกค้าไว้ใจ" },
-              { value: "4.9★", label: "รีวิวเฉลี่ย" },
+              { value: "500+", label: "ทริปที่จัดแล้ว" },
+              { value: "4.9/5", label: "คะแนนรีวิวเฉลี่ย" },
+              { value: "15 นาที", label: "เวลาตอบกลับโดยเฉลี่ย" },
             ].map((stat) => (
-              <div key={stat.label} className="text-white">
-                <div className="text-2xl font-bold">{stat.value}</div>
-                <div className="text-white/60 text-sm">{stat.label}</div>
+              <div
+                key={stat.label}
+                className="rounded-[26px] border border-[color:var(--line)] bg-white/58 px-5 py-5"
+              >
+                <p className="font-display text-3xl text-[color:var(--foreground)]">
+                  {stat.value}
+                </p>
+                <p className="mt-2 text-sm text-[color:var(--muted)]">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-8 h-12 rounded-full border-2 border-white/40 flex items-start justify-center pt-2">
-          <div className="w-1.5 h-3 bg-white/70 rounded-full" />
+        <div className="hidden self-end lg:block">
+          <div className="rounded-[34px] border border-white/20 bg-white/10 p-5 backdrop-blur-md">
+            <p className="text-xs font-semibold uppercase tracking-[0.26em] text-white/80">
+              Signature Tone
+            </p>
+            <p className="mt-3 font-display text-4xl leading-tight text-white">
+              Soft
+              <br />
+              Earthy
+              <br />
+              Calm
+            </p>
+          </div>
         </div>
       </div>
     </section>

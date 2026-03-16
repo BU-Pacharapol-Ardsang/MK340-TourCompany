@@ -2,22 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Tour } from "@/data/tours";
 
-function formatPrice(n: number) {
-  return n.toLocaleString("th-TH");
+function formatPrice(value: number) {
+  return value.toLocaleString("th-TH");
 }
 
 function getTripPaceLabel(days: number) {
-  if (days <= 4) return "ทริปสั้น";
-  if (days >= 7) return "จัดเต็มหลายวัน";
-  return "บาลานซ์กำลังดี";
+  if (days <= 4) return "สั้นกำลังดี";
+  if (days >= 7) return "เที่ยวเต็มอิ่ม";
+  return "จังหวะพอดี";
 }
 
 export default function TourCard({ tour }: { tour: Tour }) {
   const savings = tour.originalPrice ? tour.originalPrice - tour.price : 0;
 
   return (
-    <div className="group flex h-full flex-col overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-950/10">
-      <div className="relative h-56 overflow-hidden">
+    <article className="soft-card group flex h-full flex-col overflow-hidden rounded-[32px] p-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_74px_-44px_rgba(88,63,58,0.8)]">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-[26px]">
         <Image
           src={tour.image}
           alt={tour.title}
@@ -25,78 +25,78 @@ export default function TourCard({ tour }: { tour: Tour }) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/65 via-slate-950/10 to-transparent" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,249,242,0.05),rgba(66,49,57,0.46))]" />
 
         <div className="absolute left-3 top-3 flex flex-wrap gap-2">
           {tour.tag && (
-            <span className="rounded-full bg-red-500 px-3 py-1 text-xs font-bold text-white">
+            <span className="rounded-full bg-[color:var(--lavender-deep)] px-3 py-1 text-xs font-semibold text-white">
               {tour.tag}
             </span>
           )}
-          <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 backdrop-blur">
+          <span className="rounded-full bg-white/85 px-3 py-1 text-xs font-medium text-[color:var(--foreground)] backdrop-blur">
             {tour.type === "international" ? "ต่างประเทศ" : "ในประเทศ"}
           </span>
         </div>
 
-        <div className="absolute bottom-3 right-3 rounded-xl bg-black/55 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">
+        <div className="absolute bottom-3 right-3 rounded-full bg-[rgba(44,36,32,0.58)] px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm">
           {tour.days} วัน {tour.nights} คืน
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-5">
-        <div className="mb-1 text-sm font-medium text-blue-600">
-          {tour.destination} · {tour.country}
-        </div>
+      <div className="flex flex-1 flex-col px-2 pb-2 pt-5">
+        <p className="text-sm text-[color:var(--earth-deep)]">
+          {tour.destination} • {tour.country}
+        </p>
 
-        <h3 className="mb-3 line-clamp-2 text-lg font-bold text-slate-900 transition-colors group-hover:text-blue-700">
+        <h3 className="mt-2 line-clamp-2 font-display text-[1.8rem] leading-tight text-[color:var(--foreground)] transition-colors group-hover:text-[color:var(--lavender-deep)]">
           {tour.title}
         </h3>
 
-        <div className="mb-4 flex flex-wrap gap-2">
-          <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+        <div className="mt-4 flex flex-wrap gap-2">
+          <span className="rounded-full bg-[rgba(196,162,131,0.18)] px-3 py-1 text-xs font-semibold text-[color:var(--earth-deep)]">
             {getTripPaceLabel(tour.days)}
           </span>
           {savings > 0 ? (
-            <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+            <span className="rounded-full bg-[rgba(186,160,216,0.18)] px-3 py-1 text-xs font-semibold text-[color:var(--lavender-deep)]">
               ประหยัด ฿{formatPrice(savings)}
             </span>
           ) : (
-            <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-              ราคาโปรไฟล์คุ้มค่า
+            <span className="rounded-full bg-[rgba(143,115,102,0.12)] px-3 py-1 text-xs font-semibold text-[color:var(--foreground)]">
+              คัดแล้วว่าคุ้ม
             </span>
           )}
         </div>
 
-        <ul className="flex-1 space-y-1 text-sm text-slate-500">
+        <ul className="mt-5 flex-1 space-y-2 text-sm leading-6 text-[color:var(--muted)]">
           {tour.highlights.slice(0, 3).map((highlight) => (
-            <li key={highlight} className="flex items-start gap-2">
-              <span className="mt-0.5 text-blue-400">✓</span>
+            <li key={highlight} className="flex items-start gap-3">
+              <span className="mt-2 h-2 w-2 rounded-full bg-[color:var(--lavender-deep)]" />
               <span>{highlight}</span>
             </li>
           ))}
         </ul>
 
-        <div className="mt-5 flex items-end justify-between border-t border-slate-100 pt-4">
+        <div className="mt-6 flex items-end justify-between border-t border-[color:var(--line)] pt-4">
           <div>
             {tour.originalPrice && (
-              <span className="mr-2 text-sm text-slate-400 line-through">
+              <p className="text-sm text-[color:var(--muted)] line-through">
                 ฿{formatPrice(tour.originalPrice)}
-              </span>
+              </p>
             )}
-            <div className="text-2xl font-extrabold text-blue-700">
+            <p className="font-display text-4xl leading-none text-[color:var(--foreground)]">
               ฿{formatPrice(tour.price)}
-            </div>
-            <span className="text-xs text-slate-400">ต่อท่าน</span>
+            </p>
+            <span className="text-xs text-[color:var(--muted)]">ต่อท่าน</span>
           </div>
 
           <Link
             href={`/tour/${tour.id}`}
-            className="rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:scale-105 hover:bg-blue-700"
+            className="rounded-full bg-[color:var(--lavender-deep)] px-5 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
           >
             ดูรายละเอียด
           </Link>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

@@ -24,14 +24,14 @@ const budgetTabs: { key: BudgetFilter; label: string }[] = [
   { key: "all", label: "ทุกงบ" },
   { key: "under10k", label: "ไม่เกิน ฿10,000" },
   { key: "10k-30k", label: "฿10,000 - ฿30,000" },
-  { key: "over30k", label: "฿30,000 ขึ้นไป" },
+  { key: "over30k", label: "฿30,000+" },
 ];
 
 const durationTabs: { key: DurationFilter; label: string }[] = [
   { key: "all", label: "ทุกช่วงวัน" },
-  { key: "short", label: "ทริปสั้น 2-4 วัน" },
-  { key: "medium", label: "ทริปกลาง 5-6 วัน" },
-  { key: "long", label: "ทริปยาว 7 วัน+" },
+  { key: "short", label: "2 - 4 วัน" },
+  { key: "medium", label: "5 - 6 วัน" },
+  { key: "long", label: "7 วันขึ้นไป" },
 ];
 
 const sortOptions: { key: SortOption; label: string }[] = [
@@ -86,28 +86,28 @@ function sortTours(list: Tour[], sortBy: SortOption) {
 
 function getPillClass(
   active: boolean,
-  tone: "slate" | "blue" | "emerald" | "amber" = "slate",
+  tone: "lavender" | "sand" | "earth" | "plum" = "sand",
 ) {
   const base =
     "inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200";
 
   if (!active) {
-    return `${base} border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 hover:shadow-sm`;
+    return `${base} border-[color:var(--line)] bg-white/65 text-[color:var(--muted)] hover:border-[rgba(111,88,76,0.28)] hover:bg-white hover:text-[color:var(--foreground)]`;
   }
 
-  if (tone === "blue") {
-    return `${base} border-blue-600 bg-blue-600 text-white shadow-lg shadow-blue-600/20`;
+  if (tone === "lavender") {
+    return `${base} border-[color:var(--lavender-deep)] bg-[color:var(--lavender-deep)] text-white shadow-[0_20px_40px_-26px_rgba(123,101,132,0.75)]`;
   }
 
-  if (tone === "emerald") {
-    return `${base} border-emerald-600 bg-emerald-600 text-white shadow-lg shadow-emerald-600/20`;
+  if (tone === "earth") {
+    return `${base} border-[color:var(--earth-deep)] bg-[color:var(--earth-deep)] text-white shadow-[0_20px_40px_-26px_rgba(143,115,102,0.75)]`;
   }
 
-  if (tone === "amber") {
-    return `${base} border-amber-500 bg-amber-500 text-white shadow-lg shadow-amber-500/20`;
+  if (tone === "plum") {
+    return `${base} border-[rgba(76,57,78,0.96)] bg-[rgba(76,57,78,0.96)] text-white shadow-[0_20px_40px_-26px_rgba(76,57,78,0.7)]`;
   }
 
-  return `${base} border-slate-900 bg-slate-900 text-white shadow-lg shadow-slate-900/10`;
+  return `${base} border-[color:var(--earth)] bg-[color:var(--earth)] text-white shadow-[0_20px_40px_-26px_rgba(196,162,131,0.82)]`;
 }
 
 export default function TourSection() {
@@ -274,44 +274,59 @@ export default function TourSection() {
   const domesticActive = typeFilter === "domestic" || domesticFilter !== "all";
 
   return (
-    <section id="packages" className="bg-slate-50 py-20">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-12 text-center">
-          <span className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">
-            Our Packages
-          </span>
-          <h2 className="mt-3 text-3xl font-extrabold text-slate-900 sm:text-4xl">
-            แพ็กเกจทัวร์ยอดนิยม
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-slate-500">
-            เลือกทริปได้ละเอียดขึ้น ทั้งประเภท ประเทศ งบประมาณ และช่วงวัน
-            เพื่อให้เจอแพ็กเกจที่เหมาะกับลูกค้าได้เร็วกว่าเดิม
-          </p>
+    <section id="packages" className="relative px-6 py-24">
+      <div className="pointer-events-none absolute left-0 top-28 h-72 w-72 rounded-full bg-[rgba(196,162,131,0.15)] blur-3xl" />
+      <div className="pointer-events-none absolute right-0 top-56 h-72 w-72 rounded-full bg-[rgba(186,160,216,0.18)] blur-3xl" />
+
+      <div className="mx-auto max-w-7xl">
+        <div className="fade-up grid gap-6 lg:grid-cols-[1fr_0.52fr] lg:items-end">
+          <div className="max-w-3xl">
+            <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--earth-deep)]">
+              Curated Packages
+            </span>
+            <h2 className="mt-4 font-display text-4xl leading-tight text-[color:var(--foreground)] sm:text-5xl">
+              แพ็กเกจทัวร์ที่คัดโทนไว้แล้ว
+            </h2>
+            <p className="mt-4 text-base leading-8 text-[color:var(--muted)] sm:text-lg">
+              เลือกจากปลายทาง งบประมาณ จำนวนวัน และสไตล์ทริปได้ในจอเดียว
+              เพื่อให้การหาทริปที่เหมาะกับลูกค้าดูเรียบง่ายขึ้นแต่ยังละเอียดพอสำหรับการขายจริง
+            </p>
+          </div>
+
+          <div className="soft-card rounded-[30px] px-5 py-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[color:var(--earth-deep)]">
+              Brand Filter Experience
+            </p>
+            <p className="mt-3 text-sm leading-7 text-[color:var(--muted)]">
+              ตัวกรองถูกทำให้กลม นุ่ม และใช้พาเลตเดียวกับแบรนด์
+              เพื่อให้ส่วนที่ใช้งานหนักยังดูอยู่ในอารมณ์เดียวกับ hero และโลโก้
+            </p>
+          </div>
         </div>
 
-        <div className="relative overflow-hidden rounded-[32px] border border-slate-200 bg-white p-5 shadow-[0_22px_70px_-36px_rgba(37,99,235,0.35)] sm:p-8">
-          <div className="absolute -right-10 top-0 h-40 w-40 rounded-full bg-blue-100/80 blur-3xl" />
-          <div className="absolute -left-12 bottom-0 h-40 w-40 rounded-full bg-emerald-100/70 blur-3xl" />
+        <div className="glass-panel relative mt-10 overflow-hidden rounded-[38px] p-6 sm:p-8">
+          <div className="pointer-events-none absolute -right-8 top-0 h-44 w-44 rounded-full bg-[rgba(186,160,216,0.18)] blur-3xl" />
+          <div className="pointer-events-none absolute -left-8 bottom-0 h-44 w-44 rounded-full bg-[rgba(196,162,131,0.16)] blur-3xl" />
 
           <div className="relative">
-            <div className="flex flex-col gap-6 xl:flex-row xl:items-end xl:justify-between">
+            <div className="grid gap-6 xl:grid-cols-[1.12fr_0.88fr]">
               <div className="max-w-2xl">
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--earth-deep)]">
                   Smart Filter
                 </p>
-                <h3 className="mt-2 text-2xl font-bold text-slate-900 sm:text-3xl">
-                  เลือกได้ตั้งแต่ประเทศ ไปจนถึงช่วงราคาและจำนวนวัน
+                <h3 className="mt-3 font-display text-3xl leading-tight text-[color:var(--foreground)] sm:text-[2.4rem]">
+                  เลือกทริปตามประเทศ ปลายทาง งบ และจำนวนวัน
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-slate-500">
-                  ลองพิมพ์ชื่อประเทศ เมือง หรือไฮไลต์อย่าง ซากุระ ทะเล
-                  หรือฮาลองเบย์ แล้วค่อยเจาะต่อด้วยตัวกรองย่อย
+                <p className="mt-3 text-sm leading-7 text-[color:var(--muted)] sm:text-base">
+                  ลองพิมพ์ชื่อประเทศ เมือง หรือไฮไลต์อย่าง ซากุระ ทะเล ภูเขา
+                  แล้วค่อยต่อด้วยตัวกรองย่อยเพื่อหาชุดแพ็กเกจที่ใช่ได้เร็วขึ้น
                 </p>
 
                 <label htmlFor="tour-search" className="sr-only">
                   ค้นหาแพ็กเกจ
                 </label>
                 <div className="relative mt-5">
-                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-400">
+                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-lg text-[color:var(--earth-deep)]">
                     ⌕
                   </span>
                   <input
@@ -319,47 +334,67 @@ export default function TourSection() {
                     type="text"
                     value={searchQuery}
                     onChange={(event) => setSearchQuery(event.target.value)}
-                    placeholder="ค้นหา ญี่ปุ่น, กระบี่, ซากุระ, ฮาลองเบย์..."
-                    className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 pl-12 text-sm text-slate-700 outline-none transition-all placeholder:text-slate-400 focus:border-blue-400 focus:bg-white focus:ring-4 focus:ring-blue-100"
+                    placeholder="ค้นหา ญี่ปุ่น, เชียงใหม่, ซากุระ, ทะเล..."
+                    className="w-full rounded-[22px] border border-[color:var(--line)] bg-white/80 px-4 py-3.5 pl-12 text-sm text-[color:var(--foreground)] outline-none transition-all placeholder:text-[color:var(--muted)] focus:border-[color:var(--lavender-deep)] focus:bg-white"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 sm:min-w-[280px]">
-                <div className="rounded-2xl bg-slate-900 px-4 py-4 text-white">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/60">
-                    พบแพ็กเกจ
-                  </p>
-                  <p className="mt-2 text-3xl font-extrabold">{filtered.length}</p>
-                  <p className="mt-1 text-xs text-white/65">รายการที่ตรงเงื่อนไข</p>
-                </div>
-                <div className="rounded-2xl bg-blue-50 px-4 py-4 text-slate-900 ring-1 ring-blue-100">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-600">
-                    ราคาเริ่ม
-                  </p>
-                  <p className="mt-2 text-3xl font-extrabold text-blue-700">
-                    {filtered.length ? `฿${formatPrice(lowestPrice)}` : "-"}
-                  </p>
-                  <p className="mt-1 text-xs text-slate-500">สำหรับชุดผลลัพธ์ปัจจุบัน</p>
-                </div>
+              <div className="grid gap-4 sm:grid-cols-3 xl:grid-cols-1">
+                {[
+                  {
+                    label: "พบแพ็กเกจ",
+                    value: filtered.length.toString(),
+                    note: "รายการที่ตรงเงื่อนไข",
+                  },
+                  {
+                    label: "ราคาเริ่มต้น",
+                    value: filtered.length ? `฿${formatPrice(lowestPrice)}` : "-",
+                    note: "สำหรับผลลัพธ์ปัจจุบัน",
+                  },
+                  {
+                    label: "เฉลี่ยวันเดินทาง",
+                    value: `${averageDays} วัน`,
+                    note: "ช่วยประเมินจังหวะทริป",
+                  },
+                ].map((item, index) => (
+                  <div
+                    key={item.label}
+                    className={`rounded-[26px] border px-5 py-5 ${
+                      index === 1
+                        ? "border-[rgba(186,160,216,0.22)] bg-[rgba(186,160,216,0.12)]"
+                        : "border-[color:var(--line)] bg-white/65"
+                    }`}
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--earth-deep)]">
+                      {item.label}
+                    </p>
+                    <p className="mt-3 font-display text-4xl leading-none text-[color:var(--foreground)]">
+                      {item.value}
+                    </p>
+                    <p className="mt-2 text-sm text-[color:var(--muted)]">
+                      {item.note}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
 
             <div className="mt-8 space-y-4">
-              <div className="rounded-3xl bg-slate-50/90 p-4 ring-1 ring-slate-200">
+              <div className="rounded-[30px] border border-[color:var(--line)] bg-white/55 p-5">
                 <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                   <div>
-                    <p className="text-sm font-semibold text-slate-900">
+                    <p className="text-sm font-semibold text-[color:var(--foreground)]">
                       ประเภททริป
                     </p>
-                    <p className="text-xs text-slate-500">
-                      เลือกภาพรวมก่อน หรือแตะประเทศ/ปลายทางด้านล่างเพื่อสลับประเภทอัตโนมัติ
+                    <p className="text-xs text-[color:var(--muted)]">
+                      เลือกภาพรวมก่อน หรือแตะประเทศและปลายทางด้านล่างเพื่อให้ระบบสลับประเภทให้อัตโนมัติ
                     </p>
                   </div>
                   <button
                     type="button"
                     onClick={clearAllFilters}
-                    className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 transition hover:border-slate-300 hover:text-slate-900"
+                    className="inline-flex items-center justify-center rounded-full border border-[color:var(--line)] bg-white px-4 py-2 text-sm font-semibold text-[color:var(--foreground)] transition hover:-translate-y-0.5"
                   >
                     ล้างตัวกรองทั้งหมด
                   </button>
@@ -370,7 +405,7 @@ export default function TourSection() {
                       key={tab.key}
                       type="button"
                       onClick={() => handleTypeChange(tab.key)}
-                      className={getPillClass(typeFilter === tab.key, "blue")}
+                      className={getPillClass(typeFilter === tab.key, "lavender")}
                     >
                       {tab.label}
                     </button>
@@ -378,104 +413,108 @@ export default function TourSection() {
                 </div>
               </div>
 
-              <div
-                className={`rounded-3xl border p-4 transition-all ${
-                  internationalActive
-                    ? "border-blue-200 bg-blue-50/70 shadow-sm"
-                    : "border-slate-200 bg-white"
-                }`}
-              >
-                <div className="mb-3 flex flex-wrap items-center gap-2">
-                  <p className="text-sm font-semibold text-slate-900">
-                    ต่างประเทศ
-                  </p>
-                  <span className="rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-slate-500 ring-1 ring-slate-200">
-                    แตะประเทศเพื่อโฟกัสแพ็กเกจเฉพาะประเทศนั้น
-                  </span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setCountryFilter("all");
-                      if (typeFilter === "international") {
-                        setTypeFilter("all");
-                      }
-                    }}
-                    className={getPillClass(countryFilter === "all", "blue")}
-                  >
-                    ทุกประเทศ
-                  </button>
-                  {internationalCountries.map((country) => (
+              <div className="grid gap-4 lg:grid-cols-2">
+                <div
+                  className={`rounded-[30px] border p-5 transition-all ${
+                    internationalActive
+                      ? "border-[rgba(186,160,216,0.22)] bg-[rgba(186,160,216,0.12)]"
+                      : "border-[color:var(--line)] bg-white/65"
+                  }`}
+                >
+                  <div className="mb-4 flex flex-wrap items-center gap-2">
+                    <p className="text-sm font-semibold text-[color:var(--foreground)]">
+                      ต่างประเทศ
+                    </p>
+                    <span className="rounded-full bg-white/80 px-3 py-1 text-xs text-[color:var(--muted)]">
+                      แตะประเทศเพื่อโฟกัสรายการทันที
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
                     <button
-                      key={country}
                       type="button"
-                      onClick={() => handleCountrySelect(country)}
-                      className={getPillClass(countryFilter === country, "blue")}
+                      onClick={() => {
+                        setCountryFilter("all");
+                        if (typeFilter === "international") {
+                          setTypeFilter("all");
+                        }
+                      }}
+                      className={getPillClass(countryFilter === "all", "lavender")}
                     >
-                      {country}
+                      ทุกประเทศ
                     </button>
-                  ))}
+                    {internationalCountries.map((country) => (
+                      <button
+                        key={country}
+                        type="button"
+                        onClick={() => handleCountrySelect(country)}
+                        className={getPillClass(
+                          countryFilter === country,
+                          "lavender",
+                        )}
+                      >
+                        {country}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div
+                  className={`rounded-[30px] border p-5 transition-all ${
+                    domesticActive
+                      ? "border-[rgba(196,162,131,0.26)] bg-[rgba(196,162,131,0.12)]"
+                      : "border-[color:var(--line)] bg-white/65"
+                  }`}
+                >
+                  <div className="mb-4 flex flex-wrap items-center gap-2">
+                    <p className="text-sm font-semibold text-[color:var(--foreground)]">
+                      ในประเทศ
+                    </p>
+                    <span className="rounded-full bg-white/80 px-3 py-1 text-xs text-[color:var(--muted)]">
+                      เลือกจังหวัดหรือปลายทางหลักของทริป
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setDomesticFilter("all");
+                        if (typeFilter === "domestic") {
+                          setTypeFilter("all");
+                        }
+                      }}
+                      className={getPillClass(domesticFilter === "all", "earth")}
+                    >
+                      ทุกทริปในไทย
+                    </button>
+                    {domesticDestinations.map((destination) => (
+                      <button
+                        key={destination}
+                        type="button"
+                        onClick={() => handleDomesticSelect(destination)}
+                        className={getPillClass(
+                          domesticFilter === destination,
+                          "earth",
+                        )}
+                      >
+                        {destination}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <div
-                className={`rounded-3xl border p-4 transition-all ${
-                  domesticActive
-                    ? "border-emerald-200 bg-emerald-50/70 shadow-sm"
-                    : "border-slate-200 bg-white"
-                }`}
-              >
-                <div className="mb-3 flex flex-wrap items-center gap-2">
-                  <p className="text-sm font-semibold text-slate-900">ในประเทศ</p>
-                  <span className="rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-slate-500 ring-1 ring-slate-200">
-                    เลือกปลายทางหลักของทริปในไทยได้ทันที
-                  </span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setDomesticFilter("all");
-                      if (typeFilter === "domestic") {
-                        setTypeFilter("all");
-                      }
-                    }}
-                    className={getPillClass(domesticFilter === "all", "emerald")}
-                  >
-                    ทุกทริปในไทย
-                  </button>
-                  {domesticDestinations.map((destination) => (
-                    <button
-                      key={destination}
-                      type="button"
-                      onClick={() => handleDomesticSelect(destination)}
-                      className={getPillClass(
-                        domesticFilter === destination,
-                        "emerald",
-                      )}
-                    >
-                      {destination}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid gap-4 xl:grid-cols-[1.2fr,1.2fr,1fr]">
-                <div className="rounded-3xl border border-slate-200 bg-white p-4">
-                  <p className="text-sm font-semibold text-slate-900">
+              <div className="grid gap-4 xl:grid-cols-[1.1fr_1.1fr_0.95fr]">
+                <div className="rounded-[30px] border border-[color:var(--line)] bg-white/65 p-5">
+                  <p className="text-sm font-semibold text-[color:var(--foreground)]">
                     งบประมาณ
                   </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
+                  <div className="mt-4 flex flex-wrap gap-2">
                     {budgetTabs.map((tab) => (
                       <button
                         key={tab.key}
                         type="button"
                         onClick={() => setBudgetFilter(tab.key)}
-                        className={getPillClass(
-                          budgetFilter === tab.key,
-                          "emerald",
-                        )}
+                        className={getPillClass(budgetFilter === tab.key, "sand")}
                       >
                         {tab.label}
                       </button>
@@ -483,20 +522,17 @@ export default function TourSection() {
                   </div>
                 </div>
 
-                <div className="rounded-3xl border border-slate-200 bg-white p-4">
-                  <p className="text-sm font-semibold text-slate-900">
+                <div className="rounded-[30px] border border-[color:var(--line)] bg-white/65 p-5">
+                  <p className="text-sm font-semibold text-[color:var(--foreground)]">
                     ระยะเวลาทริป
                   </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
+                  <div className="mt-4 flex flex-wrap gap-2">
                     {durationTabs.map((tab) => (
                       <button
                         key={tab.key}
                         type="button"
                         onClick={() => setDurationFilter(tab.key)}
-                        className={getPillClass(
-                          durationFilter === tab.key,
-                          "amber",
-                        )}
+                        className={getPillClass(durationFilter === tab.key, "earth")}
                       >
                         {tab.label}
                       </button>
@@ -504,17 +540,17 @@ export default function TourSection() {
                   </div>
                 </div>
 
-                <div className="rounded-3xl border border-slate-200 bg-white p-4">
-                  <p className="text-sm font-semibold text-slate-900">
-                    เรียงลำดับผลลัพธ์
+                <div className="rounded-[30px] border border-[color:var(--line)] bg-white/65 p-5">
+                  <p className="text-sm font-semibold text-[color:var(--foreground)]">
+                    เรียงผลลัพธ์
                   </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
+                  <div className="mt-4 flex flex-wrap gap-2">
                     {sortOptions.map((option) => (
                       <button
                         key={option.key}
                         type="button"
                         onClick={() => setSortBy(option.key)}
-                        className={getPillClass(sortBy === option.key)}
+                        className={getPillClass(sortBy === option.key, "plum")}
                       >
                         {option.label}
                       </button>
@@ -525,15 +561,15 @@ export default function TourSection() {
 
               {activeFilters.length > 0 && (
                 <div className="flex flex-wrap items-center gap-2 pt-1">
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                    กำลังกรอง
+                  <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[color:var(--earth-deep)]">
+                    Active Filters
                   </span>
                   {activeFilters.map((filter) => (
                     <button
                       key={filter.label}
                       type="button"
                       onClick={filter.clear}
-                      className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-slate-700"
+                      className="inline-flex items-center gap-2 rounded-full bg-[rgba(76,57,78,0.94)] px-3 py-1.5 text-xs font-medium text-white transition hover:bg-[color:var(--lavender-deep)]"
                     >
                       {filter.label}
                       <span className="text-white/70">×</span>
@@ -549,12 +585,12 @@ export default function TourSection() {
           <>
             <div className="mt-10 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p className="text-sm font-semibold text-slate-900">
+                <p className="text-sm font-semibold text-[color:var(--foreground)]">
                   พบ {filtered.length} แพ็กเกจที่ตรงเงื่อนไข
                 </p>
-                <p className="text-sm text-slate-500">
-                  ราคาเริ่มต้น ฿{formatPrice(lowestPrice)} ต่อท่าน ·
-                  ระยะเวลาเฉลี่ย {averageDays} วัน
+                <p className="text-sm text-[color:var(--muted)]">
+                  ราคาเริ่มต้น ฿{formatPrice(lowestPrice)} ต่อท่าน • ระยะเวลาเฉลี่ย{" "}
+                  {averageDays} วัน
                 </p>
               </div>
             </div>
@@ -566,17 +602,18 @@ export default function TourSection() {
             </div>
           </>
         ) : (
-          <div className="mt-10 rounded-[32px] border border-dashed border-slate-300 bg-white px-6 py-16 text-center">
-            <p className="text-lg font-semibold text-slate-900">
-              ยังไม่พบแพ็กเกจที่ตรงกับเงื่อนไขนี้
+          <div className="soft-card mt-10 rounded-[34px] px-6 py-16 text-center">
+            <p className="font-display text-3xl text-[color:var(--foreground)]">
+              ยังไม่พบแพ็กเกจที่ตรงเงื่อนไขนี้
             </p>
-            <p className="mt-2 text-sm text-slate-500">
-              ลองล้างตัวกรองบางตัว หรือค้นหาด้วยคำที่กว้างขึ้นอีกนิด
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-[color:var(--muted)]">
+              ลองลดตัวกรองบางตัว หรือค้นหาด้วยคำที่กว้างขึ้นอีกนิด
+              เพื่อเปิดดูแพ็กเกจที่ใกล้เคียงก่อนค่อยไล่เลือกต่อ
             </p>
             <button
               type="button"
               onClick={clearAllFilters}
-              className="mt-6 inline-flex items-center rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
+              className="mt-6 inline-flex items-center rounded-full bg-[color:var(--lavender-deep)] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
             >
               กลับไปดูทุกแพ็กเกจ
             </button>

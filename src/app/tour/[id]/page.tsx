@@ -4,185 +4,254 @@ import { notFound } from "next/navigation";
 import { tours } from "@/data/tours";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BrandMark from "@/components/BrandMark";
 
-function formatPrice(n: number) {
-  return n.toLocaleString("th-TH");
+function formatPrice(value: number) {
+  return value.toLocaleString("th-TH");
 }
 
 export function generateStaticParams() {
-  return tours.map((t) => ({ id: t.id }));
+  return tours.map((tour) => ({ id: tour.id }));
 }
 
-export default async function TourDetailPage({
+export default function TourDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
-  const { id } = await params;
-  const tour = tours.find((t) => t.id === id);
-  if (!tour) notFound();
+  const tour = tours.find((item) => item.id === params.id);
+
+  if (!tour) {
+    notFound();
+  }
 
   return (
     <>
       <Navbar />
 
-      {/* Hero banner */}
-      <section className="relative h-[50vh] min-h-[350px]">
-        <Image
-          src={tour.image}
-          alt={tour.title}
-          fill
-          className="object-cover"
-          priority
-          quality={85}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 max-w-7xl mx-auto">
-          <Link
-            href="/#packages"
-            className="inline-flex items-center gap-2 text-white/70 hover:text-white text-sm mb-4 transition-colors"
-          >
-            ← กลับไปหน้าแพ็กเกจ
-          </Link>
-          <div className="flex flex-wrap items-center gap-3 mb-3">
-            {tour.tag && (
-              <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                {tour.tag}
-              </span>
-            )}
-            <span className="bg-white/20 backdrop-blur text-white text-xs font-semibold px-3 py-1 rounded-full">
-              {tour.type === "international" ? "🌏 ต่างประเทศ" : "🇹🇭 ในประเทศ"}
-            </span>
-            <span className="bg-white/20 backdrop-blur text-white text-xs font-semibold px-3 py-1 rounded-full">
-              {tour.days} วัน {tour.nights} คืน
-            </span>
-          </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white">
-            {tour.title}
-          </h1>
-          <p className="text-white/70 mt-2 flex items-center gap-2">
-            <span>📍</span> {tour.destination} · {tour.country}
-          </p>
-        </div>
-      </section>
-
-      {/* Content */}
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Left – Details */}
-          <div className="lg:col-span-2 space-y-10">
-            {/* Description */}
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">
-                เกี่ยวกับทริปนี้
-              </h2>
-              <p className="text-gray-600 leading-relaxed">
-                {tour.description}
-              </p>
-            </div>
-
-            {/* Highlights */}
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                ไฮไลท์
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {tour.highlights.map((h) => (
-                  <div
-                    key={h}
-                    className="flex items-start gap-3 bg-blue-50 p-4 rounded-xl"
-                  >
-                    <span className="text-blue-500 text-lg mt-0.5">✓</span>
-                    <span className="text-gray-700 font-medium">{h}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Itinerary */}
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                โปรแกรมการเดินทาง
-              </h2>
-              <div className="space-y-0">
-                {tour.itinerary.map((item, index) => (
-                  <div key={item.day} className="flex gap-4">
-                    {/* Timeline */}
-                    <div className="flex flex-col items-center">
-                      <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm shrink-0">
-                        {item.day}
-                      </div>
-                      {index < tour.itinerary.length - 1 && (
-                        <div className="w-0.5 flex-1 bg-blue-200 my-1" />
-                      )}
-                    </div>
-                    {/* Content */}
-                    <div className="pb-8">
-                      <h3 className="font-bold text-gray-900 text-lg">
-                        วันที่ {item.day}: {item.title}
-                      </h3>
-                      <p className="text-gray-500 mt-1">{item.detail}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right – Booking sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24 bg-white border border-gray-200 rounded-2xl p-6 shadow-lg space-y-6">
-              {/* Price */}
-              <div>
-                {tour.originalPrice && (
-                  <span className="text-gray-400 line-through text-lg">
-                    ฿{formatPrice(tour.originalPrice)}
+      <main className="px-6 pb-20 pt-32">
+        <div className="mx-auto max-w-7xl">
+          <section className="glass-panel overflow-hidden rounded-[40px] p-6 sm:p-8">
+            <div className="grid gap-6 lg:grid-cols-[1.04fr_0.96fr] lg:items-center">
+              <div className="relative min-h-[360px] overflow-hidden rounded-[32px]">
+                <Image
+                  src={tour.image}
+                  alt={tour.title}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 52vw"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,250,245,0.05),rgba(59,42,51,0.44))]" />
+                <div className="absolute bottom-5 left-5 flex flex-wrap gap-2">
+                  {tour.tag && (
+                    <span className="rounded-full bg-[color:var(--lavender-deep)] px-3 py-1 text-xs font-semibold text-white">
+                      {tour.tag}
+                    </span>
+                  )}
+                  <span className="rounded-full bg-white/85 px-3 py-1 text-xs font-medium text-[color:var(--foreground)] backdrop-blur">
+                    {tour.type === "international" ? "ต่างประเทศ" : "ในประเทศ"}
                   </span>
-                )}
-                <div className="text-4xl font-extrabold text-blue-700">
-                  ฿{formatPrice(tour.price)}
+                  <span className="rounded-full bg-white/85 px-3 py-1 text-xs font-medium text-[color:var(--foreground)] backdrop-blur">
+                    {tour.days} วัน {tour.nights} คืน
+                  </span>
                 </div>
-                <span className="text-gray-400 text-sm">ต่อท่าน</span>
               </div>
 
-              {/* Includes */}
-              <div>
-                <h3 className="font-bold text-gray-900 mb-3">รวมในแพ็กเกจ</h3>
-                <ul className="space-y-2">
-                  {tour.includes.map((inc) => (
-                    <li
-                      key={inc}
-                      className="flex items-start gap-2 text-sm text-gray-600"
+              <div className="flex flex-col">
+                <Link
+                  href="/#packages"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-[color:var(--earth-deep)] transition hover:text-[color:var(--foreground)]"
+                >
+                  <span aria-hidden="true">←</span>
+                  กลับไปหน้าแพ็กเกจ
+                </Link>
+
+                <p className="mt-5 text-xs font-semibold uppercase tracking-[0.26em] text-[color:var(--earth-deep)]">
+                  Curated Tour Detail
+                </p>
+                <h1 className="mt-3 font-display text-4xl leading-tight text-[color:var(--foreground)] sm:text-5xl">
+                  {tour.title}
+                </h1>
+                <p className="mt-3 text-sm text-[color:var(--muted)] sm:text-base">
+                  {tour.destination} • {tour.country}
+                </p>
+
+                <p className="mt-6 text-base leading-8 text-[color:var(--muted)]">
+                  {tour.description}
+                </p>
+
+                <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-[30px] border border-[color:var(--line)] bg-white/70 px-5 py-5">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--earth-deep)]">
+                      ราคาเริ่มต้น
+                    </p>
+                    {tour.originalPrice && (
+                      <p className="mt-3 text-sm text-[color:var(--muted)] line-through">
+                        ฿{formatPrice(tour.originalPrice)}
+                      </p>
+                    )}
+                    <p className="font-display text-5xl leading-none text-[color:var(--foreground)]">
+                      ฿{formatPrice(tour.price)}
+                    </p>
+                    <p className="mt-2 text-sm text-[color:var(--muted)]">ต่อท่าน</p>
+                  </div>
+
+                  <div className="rounded-[30px] border border-[rgba(186,160,216,0.24)] bg-[rgba(186,160,216,0.12)] px-5 py-5">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--lavender-deep)]">
+                      พร้อมปรับได้
+                    </p>
+                    <p className="mt-3 font-display text-3xl leading-tight text-[color:var(--foreground)]">
+                      ปรับช่วงวัน
+                      <br />
+                      หรือแพ็กเกจเพิ่มได้
+                    </p>
+                    <p className="mt-3 text-sm leading-6 text-[color:var(--muted)]">
+                      เหมาะกับการคุยต่อทั้งเรื่องงบ ที่พัก และกิจกรรมเสริมตามกลุ่มลูกค้า
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a
+                    href="https://line.me"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full bg-[color:var(--lavender-deep)] px-6 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
+                  >
+                    ปรึกษาทริปนี้ทาง LINE
+                  </a>
+                  <a
+                    href="tel:0812345678"
+                    className="inline-flex items-center justify-center rounded-full border border-[color:var(--line)] bg-white/70 px-6 py-3 text-sm font-semibold text-[color:var(--foreground)] transition-all hover:-translate-y-0.5 hover:bg-white"
+                  >
+                    โทร 081-234-5678
+                  </a>
+                </div>
+
+                <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                  {[
+                    "โทนอุ่นและผ่อนคลาย",
+                    "ข้อมูลชัดเจนใช้งานจริง",
+                    "ภาพรวมสอดคล้องกับแบรนด์",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="rounded-full border border-[color:var(--line)] bg-white/65 px-4 py-3 text-center text-xs font-medium text-[color:var(--foreground)]"
                     >
-                      <span className="text-green-500 mt-0.5">✓</span>
-                      <span>{inc}</span>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_0.38fr]">
+            <div className="space-y-8">
+              <section className="soft-card rounded-[34px] p-7 sm:p-8">
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--earth-deep)]">
+                  Highlights
+                </p>
+                <h2 className="mt-3 font-display text-4xl text-[color:var(--foreground)]">
+                  ไฮไลต์ของทริป
+                </h2>
+
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {tour.highlights.map((highlight) => (
+                    <div
+                      key={highlight}
+                      className="rounded-[24px] border border-[color:var(--line)] bg-white/70 p-4"
+                    >
+                      <div className="flex items-start gap-3">
+                        <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[color:var(--lavender-deep)]" />
+                        <span className="text-sm leading-7 text-[color:var(--foreground)]">
+                          {highlight}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section className="soft-card rounded-[34px] p-7 sm:p-8">
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--earth-deep)]">
+                  Itinerary
+                </p>
+                <h2 className="mt-3 font-display text-4xl text-[color:var(--foreground)]">
+                  โปรแกรมการเดินทาง
+                </h2>
+
+                <div className="mt-8 space-y-0">
+                  {tour.itinerary.map((item, index) => (
+                    <div key={item.day} className="flex gap-4">
+                      <div className="flex flex-col items-center">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[color:var(--lavender-deep)] text-sm font-semibold text-white">
+                          {item.day}
+                        </div>
+                        {index < tour.itinerary.length - 1 && (
+                          <div className="my-1 w-px flex-1 bg-[rgba(123,101,132,0.24)]" />
+                        )}
+                      </div>
+
+                      <div className="pb-8">
+                        <h3 className="font-display text-2xl leading-tight text-[color:var(--foreground)]">
+                          วันที่ {item.day} • {item.title}
+                        </h3>
+                        <p className="mt-2 text-sm leading-7 text-[color:var(--muted)] sm:text-base">
+                          {item.detail}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </div>
+
+            <aside className="lg:pt-2">
+              <div className="soft-card sticky top-28 rounded-[34px] p-6">
+                <BrandMark size="sm" showWordmark />
+
+                <div className="mt-6">
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--earth-deep)]">
+                    Included
+                  </p>
+                  <h2 className="mt-3 font-display text-3xl text-[color:var(--foreground)]">
+                    รวมในแพ็กเกจ
+                  </h2>
+                </div>
+
+                <ul className="mt-5 space-y-3 text-sm leading-7 text-[color:var(--muted)]">
+                  {tour.includes.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[color:var(--earth)]" />
+                      <span>{item}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
 
-              {/* CTAs */}
-              <div className="space-y-3">
-                <a
-                  href="https://line.me"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3.5 rounded-xl text-center transition-all hover:scale-[1.02]"
-                >
-                  💬 สนใจ แอดไลน์เลย
-                </a>
-                <a
-                  href="tel:0812345678"
-                  className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl text-center transition-all hover:scale-[1.02]"
-                >
-                  📞 โทรจอง 081-234-5678
-                </a>
-              </div>
+                <div className="mt-8 grid gap-3">
+                  <a
+                    href="https://line.me"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full bg-[color:var(--lavender-deep)] px-5 py-3 text-center text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
+                  >
+                    ขอราคาและวันเดินทาง
+                  </a>
+                  <a
+                    href="tel:0812345678"
+                    className="rounded-full border border-[color:var(--line)] bg-white/70 px-5 py-3 text-center text-sm font-semibold text-[color:var(--foreground)] transition hover:-translate-y-0.5 hover:bg-white"
+                  >
+                    โทรสอบถามทันที
+                  </a>
+                </div>
 
-              <p className="text-xs text-gray-400 text-center">
-                ✅ ปรึกษาฟรี ไม่มีค่าใช้จ่าย
-              </p>
-            </div>
+                <p className="mt-5 text-xs leading-6 text-[color:var(--muted)]">
+                  ปรึกษาฟรี ไม่มีค่าใช้จ่ายเพิ่มเติมก่อนตัดสินใจจอง
+                </p>
+              </div>
+            </aside>
           </div>
         </div>
       </main>
