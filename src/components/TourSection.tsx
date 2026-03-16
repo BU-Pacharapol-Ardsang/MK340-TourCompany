@@ -1,7 +1,7 @@
 "use client";
 
 import { useDeferredValue, useState } from "react";
-import { tours, type Tour } from "@/data/tours";
+import type { Tour } from "@/data/tours";
 import TourCard from "./TourCard";
 
 type TypeFilter = "all" | Tour["type"];
@@ -110,7 +110,7 @@ function getPillClass(
   return `${base} border-[color:var(--earth)] bg-[color:var(--earth)] text-white shadow-[0_20px_40px_-26px_rgba(196,162,131,0.82)]`;
 }
 
-export default function TourSection() {
+export default function TourSection({ tours }: { tours: Tour[] }) {
   const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
   const [budgetFilter, setBudgetFilter] = useState<BudgetFilter>("all");
   const [durationFilter, setDurationFilter] =

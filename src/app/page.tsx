@@ -4,13 +4,18 @@ import TourSection from "@/components/TourSection";
 import WhyUs from "@/components/WhyUs";
 import ContactCTA from "@/components/ContactCTA";
 import Footer from "@/components/Footer";
+import { getTours } from "@/lib/tours";
 
-export default function Home() {
+export const revalidate = 300;
+
+export default async function Home() {
+  const tours = await getTours();
+
   return (
     <main className="overflow-hidden">
       <Navbar />
       <Hero />
-      <TourSection />
+      <TourSection tours={tours} />
       <WhyUs />
       <ContactCTA />
       <Footer />

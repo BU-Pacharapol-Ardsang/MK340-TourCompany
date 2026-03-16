@@ -9,6 +9,7 @@ export interface Tour {
   price: number;
   originalPrice?: number;
   image: string;
+  gallery?: string[];
   highlights: string[];
   description: string;
   includes: string[];
