@@ -43,7 +43,7 @@ function StatusBanner({
 
   if (status === "saved") {
     return (
-      <div className="rounded-[26px] border border-[rgba(123,101,132,0.22)] bg-[rgba(186,160,216,0.14)] px-5 py-4 text-sm text-[color:var(--foreground)]">
+      <div className="rounded-[26px] border border-[rgba(29,95,191,0.22)] bg-[rgba(74,150,255,0.14)] px-5 py-4 text-sm text-[color:var(--foreground)]">
         บันทึกทัวร์เรียบร้อย{ id ? `: ${id}` : "" }
       </div>
     );
@@ -51,7 +51,7 @@ function StatusBanner({
 
   if (status === "deleted") {
     return (
-      <div className="rounded-[26px] border border-[rgba(143,115,102,0.2)] bg-[rgba(196,162,131,0.16)] px-5 py-4 text-sm text-[color:var(--foreground)]">
+      <div className="rounded-[26px] border border-[rgba(19,131,211,0.20)] bg-[rgba(102,204,255,0.16)] px-5 py-4 text-sm text-[color:var(--foreground)]">
         ลบทัวร์เรียบร้อย{ id ? `: ${id}` : "" }
       </div>
     );
@@ -338,7 +338,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                   {tours.length}
                 </p>
               </div>
-              <div className="rounded-[24px] border border-[rgba(186,160,216,0.22)] bg-[rgba(186,160,216,0.12)] px-5 py-4">
+              <div className="rounded-[24px] border border-[rgba(74,150,255,0.22)] bg-[rgba(74,150,255,0.12)] px-5 py-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--lavender-deep)]">
                   Database
                 </p>
@@ -346,7 +346,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                   Neon
                 </p>
               </div>
-              <div className="rounded-[24px] border border-[rgba(196,162,131,0.24)] bg-[rgba(196,162,131,0.14)] px-5 py-4">
+              <div className="rounded-[24px] border border-[rgba(102,204,255,0.24)] bg-[rgba(102,204,255,0.14)] px-5 py-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--earth-deep)]">
                   Images
                 </p>
@@ -430,13 +430,13 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
 
                       <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="rounded-full bg-[rgba(123,101,132,0.14)] px-3 py-1 text-xs font-semibold text-[color:var(--lavender-deep)]">
+                          <span className="rounded-full bg-[rgba(29,95,191,0.14)] px-3 py-1 text-xs font-semibold text-[color:var(--lavender-deep)]">
                             {tour.type === "international" ? "ต่างประเทศ" : "ในประเทศ"}
                           </span>
                           <span className="rounded-full bg-white/80 px-3 py-1 text-xs text-[color:var(--muted)]">
                             {tour.id}
                           </span>
-                          <span className="rounded-full bg-[rgba(196,162,131,0.16)] px-3 py-1 text-xs font-semibold text-[color:var(--earth-deep)]">
+                          <span className="rounded-full bg-[rgba(102,204,255,0.16)] px-3 py-1 text-xs font-semibold text-[color:var(--earth-deep)]">
                             Gallery {gallery.length}
                           </span>
                         </div>
@@ -485,7 +485,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                       />
                       <button
                         type="submit"
-                        className="rounded-full border border-[rgba(143,115,102,0.24)] bg-[rgba(143,115,102,0.08)] px-5 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:-translate-y-0.5 hover:bg-[rgba(143,115,102,0.14)]"
+                        className="rounded-full border border-[rgba(19,131,211,0.24)] bg-[rgba(19,131,211,0.08)] px-5 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:-translate-y-0.5 hover:bg-[rgba(19,131,211,0.14)]"
                       >
                         ลบรายการนี้
                       </button>

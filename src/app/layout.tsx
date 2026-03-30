@@ -1,17 +1,29 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Bai_Jamjuree, Charmonman, Sarabun } from "next/font/google";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const sarabun = Sarabun({
+  subsets: ["latin", "thai"],
+  variable: "--font-body",
+  weight: ["400", "500", "600", "700"],
+});
+
+const baiJamjuree = Bai_Jamjuree({
+  subsets: ["latin", "thai"],
+  variable: "--font-display-source",
+  weight: ["500", "600", "700"],
+});
+
+const charmonman = Charmonman({
+  subsets: ["latin", "thai"],
+  variable: "--font-script-source",
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Travie Tour | ทริปโทนอุ่น เลือกง่าย เดินทางสบาย",
+  title: "Travie Tour | ทริปโทนฟ้า สดใส เลือกง่าย เดินทางสบาย",
   description:
-    "แพ็กเกจทัวร์ในประเทศและต่างประเทศที่คัดเส้นทางให้จังหวะการเดินทางสบายขึ้น พร้อมบริการอบอุ่น ราคาโปร่งใส และทีมดูแลตลอดทริป",
+    "แพ็กเกจทัวร์ในประเทศและต่างประเทศที่คัดเส้นทางให้ภาพลักษณ์สดใส อ่านง่าย ราคาโปร่งใส และพร้อมทีมดูแลตลอดทริป",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -29,7 +41,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="th">
-      <body className={`${geistSans.variable} font-sans antialiased`}>
+      <body
+        className={`${sarabun.variable} ${baiJamjuree.variable} ${charmonman.variable} font-sans antialiased`}
+      >
         {children}
       </body>
     </html>

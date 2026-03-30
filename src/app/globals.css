@@ -3,25 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --background: #f6f0e9;
-  --background-soft: rgba(255, 248, 240, 0.82);
-  --surface: #fff8f1;
-  --surface-strong: #fffaf6;
-  --foreground: #2c2420;
-  --muted: #6e6058;
-  --line: rgba(111, 88, 76, 0.16);
-  --earth: #c4a283;
-  --earth-deep: #8f7366;
-  --lavender: #baa0d8;
-  --lavender-deep: #7b6584;
-  --price-accent: #8e4b4b;
-  --price-accent-soft: rgba(142, 75, 75, 0.14);
-  --cream: #eee0d0;
-  --shadow-soft: 0 30px 90px -42px rgba(88, 63, 58, 0.42);
-  --font-display:
-    "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "URW Palladio L",
-    serif;
-  --font-script: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
+  --background: #eaf6ff;
+  --background-soft: rgba(245, 251, 255, 0.84);
+  --surface: #f7fbff;
+  --surface-strong: #ffffff;
+  --foreground: #10233c;
+  --muted: #5d7288;
+  --line: rgba(57, 110, 176, 0.16);
+  --earth: #66ccff;
+  --earth-deep: #1383d3;
+  --lavender: #9dbfff;
+  --lavender-deep: #1d5fbf;
+  --price-accent: #0b8fd8;
+  --price-accent-soft: rgba(11, 143, 216, 0.14);
+  --cream: #dceeff;
+  --shadow-soft: 0 30px 90px -42px rgba(21, 74, 136, 0.28);
+  --font-display: var(--font-display-source), "Segoe UI", sans-serif;
+  --font-script: var(--font-script-source), "Segoe Print", cursive;
 }
 
 * {
@@ -35,11 +33,11 @@ html {
 body {
   color: var(--foreground);
   background:
-    radial-gradient(circle at top left, rgba(228, 212, 191, 0.72), transparent 30%),
-    radial-gradient(circle at top right, rgba(197, 176, 218, 0.42), transparent 28%),
-    radial-gradient(circle at 82% 84%, rgba(188, 162, 220, 0.14), transparent 24%),
-    linear-gradient(180deg, #f9f6f1 0%, #f5efe8 48%, #efe7de 100%);
-  font-family: var(--font-geist-sans), "Aptos", "Segoe UI", sans-serif;
+    radial-gradient(circle at top left, rgba(125, 214, 255, 0.58), transparent 32%),
+    radial-gradient(circle at top right, rgba(157, 191, 255, 0.34), transparent 28%),
+    radial-gradient(circle at 82% 84%, rgba(102, 204, 255, 0.18), transparent 24%),
+    linear-gradient(180deg, #f8fbff 0%, #edf6ff 48%, #e4f0ff 100%);
+  font-family: var(--font-body), "Segoe UI", sans-serif;
   min-height: 100vh;
   text-rendering: optimizeLegibility;
 }
@@ -50,8 +48,8 @@ a {
 }
 
 ::selection {
-  background: rgba(186, 160, 216, 0.28);
-  color: #2c2420;
+  background: rgba(102, 204, 255, 0.3);
+  color: var(--foreground);
 }
 
 .line-clamp-2 {
@@ -73,8 +71,8 @@ a {
   .glass-panel {
     background: linear-gradient(
       180deg,
-      rgba(255, 249, 242, 0.88) 0%,
-      rgba(249, 240, 233, 0.74) 100%
+      rgba(255, 255, 255, 0.84) 0%,
+      rgba(236, 247, 255, 0.74) 100%
     );
     border: 1px solid var(--line);
     box-shadow: var(--shadow-soft);
@@ -82,9 +80,9 @@ a {
   }
 
   .soft-card {
-    background: linear-gradient(180deg, #fffaf6 0%, #f8efe8 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #f1f7ff 100%);
     border: 1px solid var(--line);
-    box-shadow: 0 24px 64px -42px rgba(88, 63, 58, 0.42);
+    box-shadow: 0 24px 64px -42px rgba(21, 74, 136, 0.3);
   }
 
   .fade-up {
@@ -101,8 +99,8 @@ a {
 
   .brand-wash {
     background:
-      radial-gradient(circle at top left, rgba(255, 255, 255, 0.65), transparent 34%),
-      linear-gradient(180deg, rgba(255, 250, 245, 0.92), rgba(247, 238, 230, 0.82));
+      radial-gradient(circle at top left, rgba(255, 255, 255, 0.68), transparent 34%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(231, 243, 255, 0.82));
   }
 
   .brand-outline {
@@ -121,8 +119,8 @@ a {
 
 .brand-letter {
   text-shadow:
-    0 3px 0 rgba(214, 197, 184, 0.8),
-    0 12px 22px rgba(77, 53, 63, 0.28);
+    0 3px 0 rgba(204, 236, 255, 0.82),
+    0 12px 22px rgba(24, 78, 145, 0.22);
 }
 
 @keyframes fadeUp {

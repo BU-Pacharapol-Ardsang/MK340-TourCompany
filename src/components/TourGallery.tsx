@@ -176,7 +176,7 @@ export default function TourGallery({ items, title }: TourGalleryProps) {
     isMounted && activeIndex !== null && activeItem
       ? createPortal(
           <div
-            className="fixed inset-0 isolate z-[120] overflow-hidden bg-[rgba(14,11,10,0.92)] backdrop-blur-xl"
+            className="fixed inset-0 isolate z-[120] overflow-hidden bg-[rgba(6,23,49,0.92)] backdrop-blur-xl"
             onClick={() => setActiveIndex(null)}
           >
             <div className="absolute inset-x-4 top-4 z-[122] flex items-center justify-between gap-3 sm:inset-x-6 sm:top-5">
@@ -297,7 +297,7 @@ export default function TourGallery({ items, title }: TourGalleryProps) {
                 className="absolute inset-x-4 bottom-4 z-[122] sm:inset-x-6"
                 onClick={(event) => event.stopPropagation()}
               >
-                <div className="tour-gallery-scrollbar mx-auto flex max-w-5xl gap-3 overflow-x-auto rounded-[28px] border border-white/10 bg-[rgba(17,13,12,0.62)] px-4 py-4 backdrop-blur-xl">
+                <div className="tour-gallery-scrollbar mx-auto flex max-w-5xl gap-3 overflow-x-auto rounded-[28px] border border-white/10 bg-[rgba(8,29,61,0.62)] px-4 py-4 backdrop-blur-xl">
                   {items.map((item, index) => (
                     <button
                       key={`${item.url}-${index}`}
@@ -373,7 +373,7 @@ export default function TourGallery({ items, title }: TourGalleryProps) {
                       className="object-cover transition duration-500 group-hover:scale-[1.03]"
                       sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                     />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,250,245,0.02),rgba(28,22,20,0.18))]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(8,31,61,0.18))]" />
                     <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-3">
                       <div className="min-w-0">
                         {caption ? (
@@ -391,7 +391,7 @@ export default function TourGallery({ items, title }: TourGalleryProps) {
                     </div>
 
                     {isOverlayTile && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-[rgba(31,25,22,0.42)] backdrop-blur-[2px]">
+                      <div className="absolute inset-0 flex items-center justify-center bg-[rgba(12,44,82,0.42)] backdrop-blur-[2px]">
                         <div className="rounded-[24px] bg-white/16 px-6 py-5 text-center text-white">
                           <p className="font-display text-5xl leading-none">+{hiddenCount}</p>
                           <p className="mt-2 text-xs font-semibold uppercase tracking-[0.24em]">
@@ -427,7 +427,7 @@ export default function TourGallery({ items, title }: TourGalleryProps) {
 
         .tour-gallery-scrollbar::-webkit-scrollbar-thumb {
           background: rgba(255, 255, 255, 0.34);
-          border: 2px solid rgba(23, 18, 16, 0.72);
+          border: 2px solid rgba(8, 29, 61, 0.72);
           border-radius: 999px;
         }
 

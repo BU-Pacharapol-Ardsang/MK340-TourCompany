@@ -16,7 +16,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
   const savings = tour.originalPrice ? tour.originalPrice - tour.price : 0;
 
   return (
-    <article className="soft-card group flex h-full flex-col overflow-hidden rounded-[32px] p-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_74px_-44px_rgba(88,63,58,0.8)]">
+    <article className="soft-card group flex h-full flex-col overflow-hidden rounded-[32px] p-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_74px_-44px_rgba(21,74,136,0.48)]">
       <div className="relative aspect-[4/3] overflow-hidden rounded-[26px]">
         <Image
           src={tour.image}
@@ -25,7 +25,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,249,242,0.05),rgba(66,49,57,0.46))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(12,48,94,0.46))]" />
 
         <div className="absolute left-3 top-3 flex flex-wrap gap-2">
           {tour.tag && (
@@ -38,7 +38,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
           </span>
         </div>
 
-        <div className="absolute bottom-3 right-3 rounded-full bg-[rgba(44,36,32,0.58)] px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm">
+        <div className="absolute bottom-3 right-3 rounded-full bg-[rgba(8,31,61,0.58)] px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm">
           {tour.days} วัน {tour.nights} คืน
         </div>
       </div>
@@ -53,7 +53,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
         </h3>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          <span className="rounded-full bg-[rgba(196,162,131,0.18)] px-3 py-1 text-xs font-semibold text-[color:var(--earth-deep)]">
+          <span className="rounded-full bg-[rgba(102,204,255,0.18)] px-3 py-1 text-xs font-semibold text-[color:var(--earth-deep)]">
             {getTripPaceLabel(tour.days)}
           </span>
           {savings > 0 ? (
@@ -61,7 +61,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
               ประหยัด ฿{formatPrice(savings)}
             </span>
           ) : (
-            <span className="rounded-full bg-[rgba(143,115,102,0.12)] px-3 py-1 text-xs font-semibold text-[color:var(--foreground)]">
+            <span className="rounded-full bg-[rgba(19,131,211,0.12)] px-3 py-1 text-xs font-semibold text-[color:var(--foreground)]">
               คัดแล้วว่าคุ้ม
             </span>
           )}

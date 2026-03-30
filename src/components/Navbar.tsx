@@ -37,10 +37,10 @@ export default function Navbar() {
           <BrandMark size="sm" showWordmark />
           <span
             className={`hidden text-xs uppercase tracking-[0.32em] transition-colors sm:block ${
-              scrolled ? "text-[color:var(--muted)]" : "text-[color:#5f514c]"
+              scrolled ? "text-[color:var(--muted)]" : "text-[color:#3c648f]"
             }`}
           >
-            Travel softly, remember deeply.
+            Travel brighter, remember clearly.
           </span>
         </Link>
 
@@ -50,7 +50,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className={`text-sm font-medium transition-colors hover:text-[color:var(--lavender-deep)] ${
-                scrolled ? "text-[color:var(--foreground)]" : "text-[color:#4f423d]"
+                scrolled ? "text-[color:var(--foreground)]" : "text-[color:#234266]"
               }`}
             >
               {link.label}
@@ -75,7 +75,7 @@ export default function Navbar() {
             <span
               key={i}
               className={`block h-0.5 w-6 rounded transition-colors ${
-                scrolled ? "bg-[color:var(--foreground)]" : "bg-[color:#5b4d48]"
+                scrolled ? "bg-[color:var(--foreground)]" : "bg-[color:#234266]"
               }`}
             />
           ))}
@@ -83,7 +83,7 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="mx-4 mt-3 rounded-[28px] border border-[color:var(--line)] bg-[color:var(--surface)] shadow-[0_24px_64px_-42px_rgba(88,63,58,0.55)] md:hidden">
+        <div className="mx-4 mt-3 rounded-[28px] border border-[color:var(--line)] bg-[color:var(--surface)] shadow-[0_24px_64px_-42px_rgba(21,74,136,0.34)] md:hidden">
           <div className="flex flex-col gap-4 px-6 py-4">
             {navLinks.map((link) => (
               <a

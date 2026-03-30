@@ -39,14 +39,14 @@ export default function BrandMark({
           alt="Travie logo"
           fill
           sizes={`${imageSizes[size]}px`}
-          className="object-contain drop-shadow-[0_18px_36px_rgba(88,63,58,0.22)]"
+          className="object-contain drop-shadow-[0_18px_36px_rgba(21,74,136,0.22)]"
         />
       </div>
 
       {showWordmark && (
         <div className="pb-1">
           <span
-            className={`bg-[linear-gradient(135deg,#ccb291_8%,#b58f7e_34%,#bca2dc_76%,#7a657d_100%)] bg-clip-text font-script leading-none tracking-[-0.05em] text-transparent ${wordmarkSize[size]}`}
+            className={`bg-[linear-gradient(135deg,#66ccff_8%,#3f9cff_36%,#2e74ff_74%,#153d96_100%)] bg-clip-text font-script leading-none tracking-[-0.05em] text-transparent ${wordmarkSize[size]}`}
           >
             Travie
           </span>

@@ -12,7 +12,7 @@ export default function ContactCTA() {
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-8 text-[color:var(--muted)]">
               คุยกับทีมได้เลยถ้าต้องการปรับโปรแกรม เลือกช่วงงบ
-              หรือหาทริปที่ภาพรวมดูนุ่มนวลและขายง่ายขึ้น เราช่วยวางโทนให้ตั้งแต่หน้าเว็บจนถึงหน้าแพ็กเกจได้
+              หรือหาทริปที่ภาพรวมดูสดใสและขายง่ายขึ้น เราช่วยวางโทนให้ตั้งแต่หน้าเว็บจนถึงหน้าแพ็กเกจได้
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 text-sm text-[color:var(--muted)]">
@@ -33,7 +33,7 @@ export default function ContactCTA() {
               href="https://line.me"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-[30px] bg-[rgba(123,101,132,0.94)] px-6 py-6 text-white transition-all hover:-translate-y-1"
+              className="rounded-[30px] bg-[color:var(--lavender-deep)] px-6 py-6 text-white transition-all hover:-translate-y-1 hover:bg-[color:var(--earth-deep)]"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
                 LINE

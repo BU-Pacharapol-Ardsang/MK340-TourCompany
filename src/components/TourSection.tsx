@@ -92,22 +92,22 @@ function getPillClass(
     "inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200";
 
   if (!active) {
-    return `${base} border-[color:var(--line)] bg-white/65 text-[color:var(--muted)] hover:border-[rgba(111,88,76,0.28)] hover:bg-white hover:text-[color:var(--foreground)]`;
+    return `${base} border-[color:var(--line)] bg-white/65 text-[color:var(--muted)] hover:border-[rgba(57,110,176,0.28)] hover:bg-white hover:text-[color:var(--foreground)]`;
   }
 
   if (tone === "lavender") {
-    return `${base} border-[color:var(--lavender-deep)] bg-[color:var(--lavender-deep)] text-white shadow-[0_20px_40px_-26px_rgba(123,101,132,0.75)]`;
+    return `${base} border-[color:var(--lavender-deep)] bg-[color:var(--lavender-deep)] text-white shadow-[0_20px_40px_-26px_rgba(29,95,191,0.68)]`;
   }
 
   if (tone === "earth") {
-    return `${base} border-[color:var(--earth-deep)] bg-[color:var(--earth-deep)] text-white shadow-[0_20px_40px_-26px_rgba(143,115,102,0.75)]`;
+    return `${base} border-[color:var(--earth-deep)] bg-[color:var(--earth-deep)] text-white shadow-[0_20px_40px_-26px_rgba(19,131,211,0.64)]`;
   }
 
   if (tone === "plum") {
-    return `${base} border-[rgba(76,57,78,0.96)] bg-[rgba(76,57,78,0.96)] text-white shadow-[0_20px_40px_-26px_rgba(76,57,78,0.7)]`;
+    return `${base} border-[rgba(17,64,128,0.96)] bg-[rgba(17,64,128,0.96)] text-white shadow-[0_20px_40px_-26px_rgba(17,64,128,0.7)]`;
   }
 
-  return `${base} border-[color:var(--earth)] bg-[color:var(--earth)] text-white shadow-[0_20px_40px_-26px_rgba(196,162,131,0.82)]`;
+  return `${base} border-[color:var(--earth)] bg-[color:var(--earth)] text-white shadow-[0_20px_40px_-26px_rgba(102,204,255,0.72)]`;
 }
 
 export default function TourSection({ tours }: { tours: Tour[] }) {
@@ -275,8 +275,8 @@ export default function TourSection({ tours }: { tours: Tour[] }) {
 
   return (
     <section id="packages" className="relative px-6 py-24">
-      <div className="pointer-events-none absolute left-0 top-28 h-72 w-72 rounded-full bg-[rgba(196,162,131,0.15)] blur-3xl" />
-      <div className="pointer-events-none absolute right-0 top-56 h-72 w-72 rounded-full bg-[rgba(186,160,216,0.18)] blur-3xl" />
+      <div className="pointer-events-none absolute left-0 top-28 h-72 w-72 rounded-full bg-[rgba(102,204,255,0.15)] blur-3xl" />
+      <div className="pointer-events-none absolute right-0 top-56 h-72 w-72 rounded-full bg-[rgba(74,150,255,0.18)] blur-3xl" />
 
       <div className="mx-auto max-w-7xl">
         <div className="fade-up grid gap-6 lg:grid-cols-[1fr_0.52fr] lg:items-end">
@@ -305,8 +305,8 @@ export default function TourSection({ tours }: { tours: Tour[] }) {
         </div>
 
         <div className="glass-panel relative mt-10 overflow-hidden rounded-[38px] p-6 sm:p-8">
-          <div className="pointer-events-none absolute -right-8 top-0 h-44 w-44 rounded-full bg-[rgba(186,160,216,0.18)] blur-3xl" />
-          <div className="pointer-events-none absolute -left-8 bottom-0 h-44 w-44 rounded-full bg-[rgba(196,162,131,0.16)] blur-3xl" />
+          <div className="pointer-events-none absolute -right-8 top-0 h-44 w-44 rounded-full bg-[rgba(74,150,255,0.18)] blur-3xl" />
+          <div className="pointer-events-none absolute -left-8 bottom-0 h-44 w-44 rounded-full bg-[rgba(102,204,255,0.16)] blur-3xl" />
 
           <div className="relative">
             <div className="grid gap-6 xl:grid-cols-[1.12fr_0.88fr]">
@@ -362,7 +362,7 @@ export default function TourSection({ tours }: { tours: Tour[] }) {
                     key={item.label}
                     className={`rounded-[26px] border px-5 py-5 ${
                       index === 1
-                        ? "border-[rgba(186,160,216,0.22)] bg-[rgba(186,160,216,0.12)]"
+                        ? "border-[rgba(74,150,255,0.22)] bg-[rgba(74,150,255,0.12)]"
                         : "border-[color:var(--line)] bg-white/65"
                     }`}
                   >
@@ -417,7 +417,7 @@ export default function TourSection({ tours }: { tours: Tour[] }) {
                 <div
                   className={`rounded-[30px] border p-5 transition-all ${
                     internationalActive
-                      ? "border-[rgba(186,160,216,0.22)] bg-[rgba(186,160,216,0.12)]"
+                      ? "border-[rgba(74,150,255,0.22)] bg-[rgba(74,150,255,0.12)]"
                       : "border-[color:var(--line)] bg-white/65"
                   }`}
                 >
@@ -461,7 +461,7 @@ export default function TourSection({ tours }: { tours: Tour[] }) {
                 <div
                   className={`rounded-[30px] border p-5 transition-all ${
                     domesticActive
-                      ? "border-[rgba(196,162,131,0.26)] bg-[rgba(196,162,131,0.12)]"
+                      ? "border-[rgba(102,204,255,0.26)] bg-[rgba(102,204,255,0.12)]"
                       : "border-[color:var(--line)] bg-white/65"
                   }`}
                 >
@@ -569,7 +569,7 @@ export default function TourSection({ tours }: { tours: Tour[] }) {
                       key={filter.label}
                       type="button"
                       onClick={filter.clear}
-                      className="inline-flex items-center gap-2 rounded-full bg-[rgba(76,57,78,0.94)] px-3 py-1.5 text-xs font-medium text-white transition hover:bg-[color:var(--lavender-deep)]"
+                      className="inline-flex items-center gap-2 rounded-full bg-[rgba(17,64,128,0.94)] px-3 py-1.5 text-xs font-medium text-white transition hover:bg-[color:var(--lavender-deep)]"
                     >
                       {filter.label}
                       <span className="text-white/70">×</span>

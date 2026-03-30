@@ -43,7 +43,7 @@ export default async function TourDetailPage({
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 52vw"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,250,245,0.05),rgba(59,42,51,0.44))]" />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(12,48,94,0.44))]" />
                 <div className="absolute bottom-5 left-5 flex flex-wrap gap-2">
                   {tour.tag && (
                     <span className="rounded-full bg-[color:var(--lavender-deep)] px-3 py-1 text-xs font-semibold text-white">
@@ -83,7 +83,7 @@ export default async function TourDetailPage({
                 </p>
 
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-[30px] border border-[rgba(142,75,75,0.18)] bg-[color:var(--price-accent-soft)] px-5 py-5">
+                  <div className="rounded-[30px] border border-[rgba(11,143,216,0.18)] bg-[color:var(--price-accent-soft)] px-5 py-5">
                     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--price-accent)]">
                       ราคาเริ่มต้น
                     </p>
@@ -98,7 +98,7 @@ export default async function TourDetailPage({
                     <p className="mt-2 text-sm text-[color:var(--muted)]">ต่อท่าน</p>
                   </div>
 
-                  <div className="rounded-[30px] border border-[rgba(186,160,216,0.24)] bg-[rgba(186,160,216,0.12)] px-5 py-5">
+                  <div className="rounded-[30px] border border-[rgba(74,150,255,0.24)] bg-[rgba(74,150,255,0.12)] px-5 py-5">
                     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--lavender-deep)]">
                       พร้อมปรับได้
                     </p>
@@ -180,7 +180,7 @@ export default async function TourDetailPage({
                           {item.day}
                         </div>
                         {index < tour.itinerary.length - 1 && (
-                          <div className="my-1 w-px flex-1 bg-[rgba(123,101,132,0.24)]" />
+                          <div className="my-1 w-px flex-1 bg-[rgba(29,95,191,0.24)]" />
                         )}
                       </div>
 

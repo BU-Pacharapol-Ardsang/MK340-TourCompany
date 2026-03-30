@@ -113,7 +113,7 @@ function moveItem<T>(items: T[], fromIndex: number, toIndex: number) {
 
 function dropIndicatorClass(isActive: boolean) {
   return isActive
-    ? "border-[color:var(--lavender-deep)] bg-[rgba(186,160,216,0.14)]"
+    ? "border-[color:var(--lavender-deep)] bg-[rgba(74,150,255,0.14)]"
     : "border-[color:var(--line)] bg-white/70";
 }
 
@@ -354,7 +354,7 @@ export default function AdminGalleryEditor({
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <span className="rounded-full bg-[rgba(186,160,216,0.18)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--lavender-deep)]">
+                    <span className="rounded-full bg-[rgba(74,150,255,0.18)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--lavender-deep)]">
                       #{index + 1}
                     </span>
                     <span className="rounded-full bg-white px-3 py-1 text-xs font-medium text-[color:var(--muted)]">
@@ -380,7 +380,7 @@ export default function AdminGalleryEditor({
                     <button
                       type="button"
                       onClick={() => removeItem(item.id)}
-                      className="rounded-full border border-[rgba(143,115,102,0.24)] bg-[rgba(143,115,102,0.08)] px-3 py-2 text-xs font-semibold text-[color:var(--foreground)]"
+                      className="rounded-full border border-[rgba(19,131,211,0.24)] bg-[rgba(19,131,211,0.08)] px-3 py-2 text-xs font-semibold text-[color:var(--foreground)]"
                     >
                       ลบ
                     </button>

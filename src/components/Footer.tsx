@@ -10,7 +10,7 @@ export default function Footer() {
             <BrandMark size="sm" showWordmark />
           </Link>
           <p className="mt-5 max-w-md text-sm leading-7 text-[color:var(--muted)]">
-            เว็บไซต์ทัวร์ที่วางภาพลักษณ์ให้นุ่มนวลขึ้น ทั้งในแง่การเล่าเรื่อง การคัดแพ็กเกจ
+            เว็บไซต์ทัวร์ที่วางภาพลักษณ์ให้สดใสขึ้น ทั้งในแง่การเล่าเรื่อง การคัดแพ็กเกจ
             และการนำเสนอข้อมูลสำคัญให้ลูกค้าตัดสินใจง่ายขึ้น
           </p>
         </div>

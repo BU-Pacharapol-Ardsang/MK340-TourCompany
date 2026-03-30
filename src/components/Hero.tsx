@@ -20,8 +20,8 @@ export default function Hero() {
         <source src={heroVideoUrl} type="video/mp4" />
       </video>
 
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(39,28,26,0.72)_0%,rgba(73,54,57,0.48)_38%,rgba(246,240,233,0.16)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(194,173,220,0.32),transparent_26%),radial-gradient(circle_at_left_center,rgba(228,212,191,0.28),transparent_30%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,29,61,0.74)_0%,rgba(18,67,123,0.48)_38%,rgba(234,246,255,0.14)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(117,172,255,0.34),transparent_26%),radial-gradient(circle_at_left_center,rgba(125,214,255,0.28),transparent_30%)]" />
 
       <div className="relative mx-auto grid min-h-[78vh] max-w-7xl items-center gap-8 lg:grid-cols-[1fr_0.34fr]">
         <div className="glass-panel max-w-3xl rounded-[38px] p-7 sm:p-10">
@@ -35,14 +35,14 @@ export default function Hero() {
           <h1 className="mt-8 font-display text-5xl leading-[0.95] tracking-[-0.04em] text-[color:var(--foreground)] sm:text-6xl lg:text-[5.2rem]">
             Travel
             <span className="ml-3 font-script text-[color:var(--lavender-deep)]">
-              ที่นุ่มนวล
+              ที่สดใส
             </span>
             <br />
-            เรียบง่าย และน่าจดจำ
+            โปร่งสบาย และน่าจดจำ
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-8 text-[color:var(--muted)] sm:text-lg">
-            ภาพลักษณ์ของแบรนด์ถูกแปลงเป็นหน้าเว็บที่ดูอบอุ่น พรีเมียม และสบายตา
+            ภาพลักษณ์ของแบรนด์ถูกแปลงเป็นหน้าเว็บที่ดูสดใส คลีน และน่าเชื่อถือ
             พร้อมยังคงฟังก์ชันการขายทัวร์และการเลือกแพ็กเกจให้ใช้งานได้จริง
           </p>
 
@@ -88,9 +88,9 @@ export default function Hero() {
               Brand Philosophy
             </p>
             <p className="mt-3 font-display text-4xl leading-tight text-white">
-              Travel softly
+              Travel brighter
               <br />
-              remember deeply
+              remember clearly
               
             </p>
           </div>

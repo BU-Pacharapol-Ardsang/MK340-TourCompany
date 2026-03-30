@@ -2,20 +2,20 @@ import BrandMark from "./BrandMark";
 
 const pillars = [
   {
-    title: "อบอุ่นและผ่อนคลาย",
-    desc: "โทนการสื่อสารและการจัดทริปถูกออกแบบให้ลูกค้ารู้สึกสบาย ไม่เร่ง และไม่กดดัน",
+    title: "สดใสและผ่อนคลาย",
+    desc: "โทนการสื่อสารและการจัดทริปถูกออกแบบให้ลูกค้ารู้สึกโปร่งสบาย มองง่าย และไม่กดดัน",
   },
   {
     title: "น่าเชื่อถือและชัดเจน",
     desc: "ข้อมูลราคา สิ่งที่รวม และจังหวะการเดินทางถูกสรุปให้ดูง่ายตั้งแต่หน้าแรก",
   },
   {
-    title: "เรียบง่ายแต่มีรสนิยม",
+    title: "เรียบง่ายแต่ดูทันสมัย",
     desc: "เลือกเส้นทาง ที่พัก และ mood ของทริปให้ภาพรวมดูพรีเมียมแบบไม่ต้องแข็งเกินไป",
   },
   {
-    title: "มีจินตนาการพอดี",
-    desc: "เติมความละมุนด้วยสีลาเวนเดอร์และงานภาพที่ทำให้แบรนด์ดูมีเอกลักษณ์ขึ้น",
+    title: "มีพลังของแบรนด์ชัดขึ้น",
+    desc: "เติมภาพจำด้วยโทนฟ้าและงานภาพที่ทำให้แบรนด์ดูสดใหม่และจดจำง่ายขึ้น",
   },
 ];
 
@@ -28,12 +28,12 @@ export default function WhyUs() {
             Why Travie
           </span>
           <h2 className="mt-4 font-display text-4xl leading-tight text-[color:var(--foreground)] sm:text-5xl">
-            ความอบอุ่น ความไว้วางใจ
+            ความสดใส ความไว้วางใจ
             <br />
-            และความละมุนในหน้าเดียว
+            และความชัดเจนในหน้าเดียว
           </h2>
           <p className="mt-5 text-base leading-8 text-[color:var(--muted)]">
-            ภาพอ้างอิงที่คุณให้มาชัดเจนว่าอยากได้แบรนด์ที่ดู soft, organic
+            ภาพอ้างอิงล่าสุดชัดเจนว่าแบรนด์ต้องการภาพลักษณ์ที่ดู fresh, airy
             และมีมิติ เราเลยแปลงแนวคิดนั้นเป็นภาษาหน้าเว็บที่ใช้ได้จริงกับการขายแพ็กเกจทัวร์
           </p>
 
@@ -46,11 +46,11 @@ export default function WhyUs() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[color:var(--lavender-deep)]" />
-                <span>ลดความแข็งของเว็บทัวร์แบบโปรโมชัน ให้ภาพรวมดูร่วมสมัยและจดจำง่าย</span>
+                <span>เพิ่มความชัดของเว็บทัวร์แบบร่วมสมัย ให้ภาพรวมดูคลีนและจดจำง่าย</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[color:var(--earth-deep)]" />
-                <span>เหมาะกับแบรนด์ที่อยากสื่อความละเอียด อ่อนโยน และพร้อมดูแลลูกค้าตลอดทริป</span>
+                <span>เหมาะกับแบรนด์ที่อยากสื่อความใส่ใจ โปร่งสบาย และพร้อมดูแลลูกค้าตลอดทริป</span>
               </li>
             </ul>
           </div>
@@ -63,7 +63,7 @@ export default function WhyUs() {
               className="soft-card rounded-[30px] p-6 sm:p-7"
             >
               <div className="flex items-center justify-between gap-4">
-                <span className="font-display text-5xl leading-none text-[rgba(123,101,132,0.32)]">
+                <span className="font-display text-5xl leading-none text-[rgba(29,95,191,0.24)]">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <span className="rounded-full bg-[rgba(255,255,255,0.72)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[color:var(--earth-deep)]">
