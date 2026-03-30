@@ -1,23 +1,17 @@
 import type { Metadata } from "next";
-import { Bai_Jamjuree, Charmonman, Sarabun } from "next/font/google";
+import { Kanit, Prompt } from "next/font/google";
 import "./globals.css";
 
-const sarabun = Sarabun({
+const kanit = Kanit({
   subsets: ["latin", "thai"],
   variable: "--font-body",
   weight: ["400", "500", "600", "700"],
 });
 
-const baiJamjuree = Bai_Jamjuree({
+const prompt = Prompt({
   subsets: ["latin", "thai"],
   variable: "--font-display-source",
   weight: ["500", "600", "700"],
-});
-
-const charmonman = Charmonman({
-  subsets: ["latin", "thai"],
-  variable: "--font-script-source",
-  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -42,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body
-        className={`${sarabun.variable} ${baiJamjuree.variable} ${charmonman.variable} font-sans antialiased`}
+        className={`${kanit.variable} ${prompt.variable} font-sans antialiased`}
       >
         {children}
       </body>

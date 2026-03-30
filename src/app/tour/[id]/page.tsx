@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BrandMark from "@/components/BrandMark";
+import { MessageIcon, PhoneIcon } from "@/components/CtaIcons";
 import TourGallery from "@/components/TourGallery";
 import { getTourById } from "@/lib/tours";
 
@@ -118,14 +119,16 @@ export default async function TourDetailPage({
                     href="https://line.me"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full bg-[color:var(--lavender-deep)] px-6 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--lavender-deep)] px-6 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
                   >
+                    <MessageIcon className="h-4 w-4" />
                     ปรึกษาทริปนี้ทาง LINE
                   </a>
                   <a
                     href="tel:0812345678"
-                    className="inline-flex items-center justify-center rounded-full border border-[color:var(--line)] bg-white/70 px-6 py-3 text-sm font-semibold text-[color:var(--foreground)] transition-all hover:-translate-y-0.5 hover:bg-white"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--line)] bg-white/70 px-6 py-3 text-sm font-semibold text-[color:var(--foreground)] transition-all hover:-translate-y-0.5 hover:bg-white"
                   >
+                    <PhoneIcon className="h-4 w-4" />
                     โทร 081-234-5678
                   </a>
                 </div>
@@ -225,14 +228,16 @@ export default async function TourDetailPage({
                     href="https://line.me"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full bg-[color:var(--lavender-deep)] px-5 py-3 text-center text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--lavender-deep)] px-5 py-3 text-center text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
                   >
+                    <MessageIcon className="h-4 w-4" />
                     ขอราคาและวันเดินทาง
                   </a>
                   <a
                     href="tel:0812345678"
-                    className="rounded-full border border-[color:var(--line)] bg-white/70 px-5 py-3 text-center text-sm font-semibold text-[color:var(--foreground)] transition hover:-translate-y-0.5 hover:bg-white"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--line)] bg-white/70 px-5 py-3 text-center text-sm font-semibold text-[color:var(--foreground)] transition hover:-translate-y-0.5 hover:bg-white"
                   >
+                    <PhoneIcon className="h-4 w-4" />
                     โทรสอบถามทันที
                   </a>
                 </div>

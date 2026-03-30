@@ -1,3 +1,5 @@
+import { MessageIcon, PhoneIcon } from "./CtaIcons";
+
 export default function ContactCTA() {
   return (
     <section id="contact" className="px-6 py-24">
@@ -35,10 +37,13 @@ export default function ContactCTA() {
               rel="noopener noreferrer"
               className="rounded-[30px] bg-[color:var(--lavender-deep)] px-6 py-6 text-white transition-all hover:-translate-y-1 hover:bg-[color:var(--earth-deep)]"
             >
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white/14 text-white">
+                <MessageIcon className="h-5 w-5" />
+              </span>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
                 LINE
               </p>
-              <p className="mt-2 font-display text-3xl leading-none">
+              <p className="mt-4 font-display text-3xl leading-none">
                 แอดไลน์สอบถาม
               </p>
               <p className="mt-3 text-sm text-white/80">
@@ -50,10 +55,13 @@ export default function ContactCTA() {
               href="tel:0812345678"
               className="soft-card rounded-[30px] px-6 py-6 transition-all hover:-translate-y-1"
             >
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(19,131,211,0.12)] text-[color:var(--lavender-deep)]">
+                <PhoneIcon className="h-5 w-5" />
+              </span>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--earth-deep)]">
                 Phone
               </p>
-              <p className="mt-2 font-display text-3xl leading-none text-[color:var(--foreground)]">
+              <p className="mt-4 font-display text-3xl leading-none text-[color:var(--foreground)]">
                 081-234-5678
               </p>
               <p className="mt-3 text-sm text-[color:var(--muted)]">

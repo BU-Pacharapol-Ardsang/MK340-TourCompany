@@ -19,7 +19,7 @@
   --cream: #dceeff;
   --shadow-soft: 0 30px 90px -42px rgba(21, 74, 136, 0.28);
   --font-display: var(--font-display-source), "Segoe UI", sans-serif;
-  --font-script: var(--font-script-source), "Segoe Print", cursive;
+  --font-script: var(--font-display);
 }
 
 * {

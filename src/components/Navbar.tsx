@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import BrandMark from "./BrandMark";
+import { MessageIcon } from "./CtaIcons";
 
 const navLinks = [
   { href: "#packages", label: "แพ็กเกจ" },
@@ -60,8 +61,9 @@ export default function Navbar() {
             href="https://line.me"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-[color:var(--lavender-deep)] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
-          >
+            className="inline-flex items-center gap-2 rounded-full bg-[color:var(--lavender-deep)] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
+            >
+            <MessageIcon className="h-4 w-4" />
             คุยแผนทริป
           </a>
         </div>
@@ -99,8 +101,9 @@ export default function Navbar() {
               href="https://line.me"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-[color:var(--lavender-deep)] px-5 py-2.5 text-center font-semibold text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--lavender-deep)] px-5 py-2.5 text-center font-semibold text-white"
             >
+              <MessageIcon className="h-4 w-4" />
               คุยแผนทริป
             </a>
           </div>

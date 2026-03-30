@@ -1,4 +1,5 @@
 import BrandMark from "./BrandMark";
+import { ArrowRightIcon, MessageIcon } from "./CtaIcons";
 
 const heroVideoUrl =
   process.env.NEXT_PUBLIC_HERO_VIDEO_URL?.trim() ||
@@ -49,14 +50,16 @@ export default function Hero() {
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <a
               href="#packages"
-              className="inline-flex items-center justify-center rounded-full bg-[color:var(--lavender-deep)] px-8 py-4 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--lavender-deep)] px-8 py-4 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
             >
+              <ArrowRightIcon className="order-last h-4 w-4" />
               ดูแพ็กเกจทั้งหมด
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center justify-center rounded-full border border-[color:var(--line)] bg-white/60 px-8 py-4 text-sm font-semibold text-[color:var(--foreground)] transition-all hover:-translate-y-0.5 hover:bg-white"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-[color:var(--line)] bg-white/60 px-8 py-4 text-sm font-semibold text-[color:var(--foreground)] transition-all hover:-translate-y-0.5 hover:bg-white"
             >
+              <MessageIcon className="h-4 w-4" />
               ปรึกษาทริปฟรี
             </a>
           </div>

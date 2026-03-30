@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Tour } from "@/data/tours";
+import { ArrowRightIcon } from "@/components/CtaIcons";
 
 function formatPrice(value: number) {
   return value.toLocaleString("th-TH");
@@ -91,8 +92,9 @@ export default function TourCard({ tour }: { tour: Tour }) {
 
           <Link
             href={`/tour/${tour.id}`}
-            className="rounded-full bg-[color:var(--lavender-deep)] px-5 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
+            className="inline-flex items-center gap-2 rounded-full bg-[color:var(--lavender-deep)] px-5 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
           >
+            <ArrowRightIcon className="order-last h-4 w-4" />
             ดูรายละเอียด
           </Link>
         </div>
