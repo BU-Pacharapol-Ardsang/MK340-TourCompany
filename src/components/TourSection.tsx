@@ -285,21 +285,22 @@ export default function TourSection({ tours }: { tours: Tour[] }) {
               Curated Packages
             </span>
             <h2 className="mt-4 font-display text-4xl leading-tight text-[color:var(--foreground)] sm:text-5xl">
-              แพ็กเกจทัวร์ที่คัดโทนไว้แล้ว
+              แพ็กเกจทัวร์ที่เลือกได้ตามสไตล์คุณ
             </h2>
             <p className="mt-4 text-base leading-8 text-[color:var(--muted)] sm:text-lg">
-              เลือกจากปลายทาง งบประมาณ จำนวนวัน และสไตล์ทริปได้ในจอเดียว
-              เพื่อให้การหาทริปที่เหมาะกับลูกค้าดูเรียบง่ายขึ้นแต่ยังละเอียดพอสำหรับการขายจริง
+              กรองตามปลายทาง งบประมาณ และจำนวนวัน
+              เพื่อหาแพ็กเกจที่ตรงใจได้เร็วขึ้น
+              ไม่ว่าจะมองหาทริปสั้นในไทยหรือทริปต่างประเทศเต็มอิ่ม
             </p>
           </div>
 
           <div className="soft-card rounded-[30px] px-5 py-5">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[color:var(--earth-deep)]">
-              Brand Filter Experience
+              เลือกง่ายในหน้าเดียว
             </p>
             <p className="mt-3 text-sm leading-7 text-[color:var(--muted)]">
-              ตัวกรองถูกทำให้กลม นุ่ม และใช้พาเลตเดียวกับแบรนด์
-              เพื่อให้ส่วนที่ใช้งานหนักยังดูอยู่ในอารมณ์เดียวกับ hero และโลโก้
+              เทียบประเทศ งบ และจำนวนวันได้ทันที
+              เพื่อคัดทริปที่ตรงใจแล้วค่อยเปิดดูรายละเอียดต่อได้เร็วขึ้น
             </p>
           </div>
         </div>

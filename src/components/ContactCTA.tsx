@@ -10,11 +10,13 @@ export default function ContactCTA() {
               Contact
             </span>
             <h2 className="mt-4 font-display text-4xl leading-tight text-[color:var(--foreground)] sm:text-5xl">
-              พร้อมวางแผนทริปที่จังหวะพอดีกับลูกค้าแล้วหรือยัง
+              พร้อมหาทริปที่พอดีกับงบ
+              และวันเดินทางแล้วหรือยัง
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-8 text-[color:var(--muted)]">
-              คุยกับทีมได้เลยถ้าต้องการปรับโปรแกรม เลือกช่วงงบ
-              หรือหาทริปที่ภาพรวมดูสดใสและขายง่ายขึ้น เราช่วยวางโทนให้ตั้งแต่หน้าเว็บจนถึงหน้าแพ็กเกจได้
+              บอกเราได้เลยว่าอยากไปไหน เดินทางช่วงไหน และมีงบประมาณเท่าไร
+              ทีมจะช่วยแนะนำแพ็กเกจที่เหมาะ ปรับโปรแกรม
+              และสรุปรายละเอียดให้ตัดสินใจง่ายขึ้น
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 text-sm text-[color:var(--muted)]">

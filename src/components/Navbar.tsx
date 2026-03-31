@@ -28,30 +28,43 @@ export default function Navbar() {
       }`}
     >
       <div
-        className={`mx-auto flex max-w-7xl items-center justify-between rounded-full border px-5 transition-all duration-300 sm:px-6 ${
+        className={`relative isolate mx-auto flex max-w-7xl items-center justify-between overflow-hidden rounded-full border px-5 transition-all duration-300 sm:px-6 ${
           scrolled
-            ? "glass-panel border-[color:var(--line)] py-3"
-            : "border-transparent bg-white/20 py-3 backdrop-blur-md"
+            ? "glass-panel border-[color:var(--line)] py-3 shadow-[0_20px_48px_-30px_rgba(8,29,61,0.32)]"
+            : "border-white/18 bg-white/10 py-3 shadow-[0_24px_54px_-34px_rgba(8,29,61,0.5)]"
         }`}
       >
-        <Link href="/" className="flex items-center gap-3">
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none absolute inset-0 ${
+            scrolled
+              ? "bg-[linear-gradient(180deg,rgba(255,255,255,0.3)_0%,rgba(240,247,255,0.12)_100%)]"
+              : "bg-[linear-gradient(90deg,rgba(255,255,255,0.54)_0%,rgba(239,246,255,0.42)_50%,rgba(255,255,255,0.5)_100%)] backdrop-blur-xl"
+          }`}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-[1px] rounded-full border border-white/20"
+        />
+
+        <Link href="/" className="relative z-10 flex items-center gap-3">
           <BrandMark size="sm" showWordmark />
           <span
             className={`hidden text-xs uppercase tracking-[0.32em] transition-colors sm:block ${
-              scrolled ? "text-[color:var(--muted)]" : "text-[color:#3c648f]"
+              scrolled ? "text-[color:var(--muted)]" : "text-[color:#315782]"
             }`}
           >
             Travel brighter, remember clearly.
           </span>
         </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="relative z-10 hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               className={`text-sm font-medium transition-colors hover:text-[color:var(--lavender-deep)] ${
-                scrolled ? "text-[color:var(--foreground)]" : "text-[color:#234266]"
+                scrolled ? "text-[color:var(--foreground)]" : "text-[color:#1f4065]"
               }`}
             >
               {link.label}
@@ -70,7 +83,7 @@ export default function Navbar() {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="flex flex-col gap-1.5 md:hidden"
+          className="relative z-10 flex flex-col gap-1.5 md:hidden"
           aria-label="Toggle menu"
         >
           {[0, 1, 2].map((i) => (
