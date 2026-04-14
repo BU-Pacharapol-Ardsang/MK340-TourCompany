@@ -27,7 +27,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(12,48,94,0.46))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(12,48,94,0.22))]" />
 
         <div className="absolute left-3 top-3 flex flex-wrap gap-2">
           {tour.tag && (

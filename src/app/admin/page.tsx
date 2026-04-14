@@ -2,8 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Tour } from "@/data/tours";
 import BrandMark from "@/components/BrandMark";
+import AdminCopyLinkButton from "@/components/admin/AdminCopyLinkButton";
 import AdminGalleryEditor from "@/components/admin/AdminGalleryEditor";
 import AdminReviewCodeGenerator from "@/components/admin/AdminReviewCodeGenerator";
+import AdminStatusToast from "@/components/admin/AdminStatusToast";
+import AdminSubmitButton from "@/components/admin/AdminSubmitButton";
 import { getTours } from "@/lib/tours";
 import { deleteTourAction, saveTourAction } from "./actions";
 
@@ -27,6 +30,18 @@ function formatList(items: string[]) {
 
 function formatItinerary(items: Tour["itinerary"]) {
   return items.map((item) => `${item.day} | ${item.title} | ${item.detail}`).join("\n");
+}
+
+function isBlobUrl(value: string) {
+  return /^https:\/\/.+\.blob\.vercel-storage\.com\/.+/i.test(value);
+}
+
+function truncateText(value: string, max = 110) {
+  if (value.length <= max) {
+    return value;
+  }
+
+  return `${value.slice(0, max - 1)}…`;
 }
 
 function StatusBanner({
@@ -234,7 +249,7 @@ function TourForm({
 
       <FieldShell
         label="Upload Cover Image To Blob"
-        hint="ถ้าเลือกไฟล์ใหม่ ระบบจะอัปโหลดขึ้น Blob และใช้เป็นรูปหลักแทน"
+        hint="ถ้าเลือกไฟล์ใหม่ ระบบจะอัปโหลดขึ้น Blob และใช้เป็นรูปหลักแทนทันทีหลังบันทึก"
       >
         <input
           type="file"
@@ -243,6 +258,34 @@ function TourForm({
           className="block w-full rounded-[18px] border border-dashed border-[color:var(--line)] bg-white/55 px-4 py-3 text-sm text-[color:var(--muted)]"
         />
       </FieldShell>
+
+      {tour?.image ? (
+        <div className="rounded-[22px] border border-[color:var(--line)] bg-white/65 px-4 py-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[color:var(--earth-deep)]">
+            Current Cover URL
+          </p>
+          <p className="mt-2 text-sm font-medium text-[color:var(--foreground)]">
+            {isBlobUrl(tour.image) ? "Vercel Blob" : "Local Path"}
+          </p>
+          <p className="mt-1 break-all text-xs leading-6 text-[color:var(--muted)]">
+            {tour.image}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2 text-xs">
+            <a
+              href={tour.image}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-[color:var(--line)] bg-white px-3 py-1.5 font-semibold text-[color:var(--foreground)] transition hover:-translate-y-0.5"
+            >
+              เปิดรูป
+            </a>
+            <AdminCopyLinkButton value={tour.image} />
+            <span className="rounded-full bg-[rgba(102,204,255,0.14)] px-3 py-1.5 font-medium text-[color:var(--foreground)]">
+              {truncateText(tour.image, 78)}
+            </span>
+          </div>
+        </div>
+      ) : null}
 
       <AdminGalleryEditor initialItems={gallery} />
 
@@ -294,12 +337,10 @@ function TourForm({
         <div className="text-xs leading-6 text-[color:var(--muted)]">
           {description}
         </div>
-        <button
-          type="submit"
-          className="rounded-full bg-[color:var(--lavender-deep)] px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[color:var(--earth-deep)]"
-        >
-          {submitLabel}
-        </button>
+        <AdminSubmitButton
+          idleLabel={submitLabel}
+          pendingLabel={tour ? "กำลังอัปเดต..." : "กำลังสร้าง..."}
+        />
       </div>
     </form>
   );
@@ -311,6 +352,12 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
   return (
     <main className="px-4 py-10 sm:px-6">
       <div className="mx-auto max-w-7xl space-y-8">
+        <AdminStatusToast
+          status={searchParams?.status}
+          id={searchParams?.id}
+          message={searchParams?.message}
+        />
+
         <header className="glass-panel rounded-[36px] px-6 py-6 sm:px-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
@@ -437,6 +484,9 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                           <span className="rounded-full bg-white/80 px-3 py-1 text-xs text-[color:var(--muted)]">
                             {tour.id}
                           </span>
+                          <span className="rounded-full bg-white/80 px-3 py-1 text-xs font-medium text-[color:var(--muted)]">
+                            Cover: {isBlobUrl(tour.image) ? "Blob" : "Local"}
+                          </span>
                           <span className="rounded-full bg-[rgba(102,204,255,0.16)] px-3 py-1 text-xs font-semibold text-[color:var(--earth-deep)]">
                             Gallery {gallery.length}
                           </span>
@@ -446,6 +496,9 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                         </h3>
                         <p className="mt-2 text-sm text-[color:var(--muted)]">
                           {tour.destination} • {tour.country}
+                        </p>
+                        <p className="mt-1 line-clamp-1 text-xs text-[color:var(--muted)]">
+                          {truncateText(tour.image, 92)}
                         </p>
                       </div>
                     </div>
