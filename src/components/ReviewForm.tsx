@@ -47,7 +47,7 @@ export default function ReviewForm({ tourId, onSubmitSuccess }: ReviewFormProps)
       } else {
         setCodeError(data.message || "รหัสรีวิวไม่ถูกต้อง");
       }
-    } catch (error) {
+    } catch {
       setCodeError("เกิดข้อผิดพลาดในการตรวจสอบรหัส");
     } finally {
       setIsValidatingCode(false);
@@ -131,7 +131,7 @@ export default function ReviewForm({ tourId, onSubmitSuccess }: ReviewFormProps)
       } else {
         setSubmitError(data.error || "เกิดข้อผิดพลาดในการส่งรีวิว");
       }
-    } catch (error) {
+    } catch {
       setSubmitError("เกิดข้อผิดพลาดในการส่งรีวิว");
     } finally {
       setIsSubmitting(false);

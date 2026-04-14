@@ -102,7 +102,7 @@ export default function AdminReviewCodeGenerator({
       } else {
         setError(data.error || "เกิดข้อผิดพลาดในการสร้างรหัส");
       }
-    } catch (error) {
+    } catch {
       setError("เกิดข้อผิดพลาดในการเชื่อมต่อ");
     } finally {
       setIsGenerating(false);

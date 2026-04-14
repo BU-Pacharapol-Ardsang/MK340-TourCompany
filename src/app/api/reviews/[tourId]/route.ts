@@ -3,6 +3,16 @@ import { requireDatabaseUrl } from "@/lib/env";
 
 const sql = neon(requireDatabaseUrl());
 
+type ReviewRow = {
+  id: string;
+  name: string | null;
+  email: string | null;
+  rating: number;
+  comment: string | null;
+  images: string[];
+  created_at: string;
+};
+
 export const revalidate = 60; // Cache for 60 seconds
 
 export async function GET(
@@ -36,12 +46,12 @@ export async function GET(
       });
     }
 
+    const reviews = result as ReviewRow[];
     const averageRating =
-      result.reduce((sum: number, review: any) => sum + review.rating, 0) /
-      result.length;
+      reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
 
     return Response.json({
-      reviews: result,
+      reviews,
       averageRating: Math.round(averageRating * 10) / 10,
       totalReviews: result.length,
     });
