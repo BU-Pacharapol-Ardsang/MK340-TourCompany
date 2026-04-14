@@ -31,6 +31,6 @@ export function requireDatabaseUrl() {
   return databaseUrl;
 }
 
-export function getBlobReadWriteToken() {
-  return process.env.BLOB_READ_WRITE_TOKEN ?? null;
+export function getBlobReadWriteToken(): string | undefined {
+  return process.env.BLOB_READ_WRITE_TOKEN || undefined;
 }
