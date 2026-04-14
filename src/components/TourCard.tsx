@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Tour } from "@/data/tours";
 import { ArrowRightIcon } from "@/components/CtaIcons";
+import ReviewSummary from "@/components/ReviewSummary";
 
 function formatPrice(value: number) {
   return value.toLocaleString("th-TH");
@@ -66,6 +67,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
               คัดแล้วว่าคุ้ม
             </span>
           )}
+          <ReviewSummary tourId={tour.id} />
         </div>
 
         <ul className="mt-5 flex-1 space-y-2 text-sm leading-6 text-[color:var(--muted)]">

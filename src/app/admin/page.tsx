@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Tour } from "@/data/tours";
 import BrandMark from "@/components/BrandMark";
 import AdminGalleryEditor from "@/components/admin/AdminGalleryEditor";
+import AdminReviewCodeGenerator from "@/components/admin/AdminReviewCodeGenerator";
 import { getTours } from "@/lib/tours";
 import { deleteTourAction, saveTourAction } from "./actions";
 
@@ -497,6 +498,10 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
                     submitLabel="บันทึกการแก้ไข"
                     tour={tour}
                   />
+
+                  <div className="mt-8 border-t border-[color:var(--line)] pt-8">
+                    <AdminReviewCodeGenerator tourId={tour.id} tourTitle={tour.title} />
+                  </div>
                 </div>
               </details>
             );

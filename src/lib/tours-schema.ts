@@ -47,6 +47,50 @@ export async function ensureToursSchema() {
         ALTER TABLE tours
         ADD COLUMN IF NOT EXISTS gallery JSONB NOT NULL DEFAULT '[]'::jsonb
       `;
+
+      await sql`
+        CREATE TABLE IF NOT EXISTS review_codes (
+          id TEXT PRIMARY KEY,
+          code TEXT NOT NULL UNIQUE,
+          tour_id TEXT NOT NULL REFERENCES tours(id) ON DELETE CASCADE,
+          used BOOLEAN NOT NULL DEFAULT FALSE,
+          used_by TEXT,
+          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+      `;
+
+      await sql`
+        CREATE INDEX IF NOT EXISTS idx_review_codes_tour_id ON review_codes(tour_id)
+      `;
+
+      await sql`
+        CREATE INDEX IF NOT EXISTS idx_review_codes_code ON review_codes(code)
+      `;
+
+      await sql`
+        CREATE TABLE IF NOT EXISTS reviews (
+          id TEXT PRIMARY KEY,
+          tour_id TEXT NOT NULL REFERENCES tours(id) ON DELETE CASCADE,
+          review_code_id TEXT NOT NULL REFERENCES review_codes(id) ON DELETE CASCADE,
+          name TEXT NOT NULL,
+          email TEXT NOT NULL,
+          rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+          comment TEXT,
+          images JSONB NOT NULL DEFAULT '[]'::jsonb,
+          visible BOOLEAN NOT NULL DEFAULT TRUE,
+          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        )
+      `;
+
+      await sql`
+        CREATE INDEX IF NOT EXISTS idx_reviews_tour_id ON reviews(tour_id)
+      `;
+
+      await sql`
+        CREATE INDEX IF NOT EXISTS idx_reviews_review_code_id ON reviews(review_code_id)
+      `;
     })();
   }
 

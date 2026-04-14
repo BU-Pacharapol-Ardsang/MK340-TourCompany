@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import BrandMark from "@/components/BrandMark";
 import { MessageIcon, PhoneIcon } from "@/components/CtaIcons";
 import TourGallery from "@/components/TourGallery";
+import ReviewsList from "@/components/ReviewsList";
+import ReviewForm from "@/components/ReviewForm";
 import { getTourById } from "@/lib/tours";
 
 export const revalidate = 300;
@@ -248,6 +250,28 @@ export default async function TourDetailPage({
               </div>
             </aside>
           </div>
+
+          {/* Reviews Section */}
+          <section className="mt-16 space-y-8">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--earth-deep)]">
+                Reviews
+              </p>
+              <h2 className="mt-3 font-display text-4xl text-[color:var(--foreground)]">
+                รีวิวจากผู้เข้าร่วมเที่ยว
+              </h2>
+            </div>
+
+            <div className="grid gap-8 lg:grid-cols-3">
+              <div className="lg:col-span-2">
+                <ReviewsList tourId={tour.id} />
+              </div>
+
+              <div className="lg:col-span-1">
+                <ReviewForm tourId={tour.id} />
+              </div>
+            </div>
+          </section>
         </div>
       </main>
 
