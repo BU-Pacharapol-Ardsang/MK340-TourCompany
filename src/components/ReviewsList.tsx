@@ -90,7 +90,10 @@ export default function ReviewsList({ tourId }: ReviewsListProps) {
           });
 
           return (
-            <div key={review.id} className="border border-gray-200 rounded-lg p-4">
+            <div
+              key={review.id}
+              className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm"
+            >
               {/* Header */}
               <div className="flex items-start justify-between mb-3">
                 <div>

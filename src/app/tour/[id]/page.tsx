@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BrandMark from "@/components/BrandMark";
+import TourCardImage from "@/components/TourCardImage";
 import { MessageIcon, PhoneIcon } from "@/components/CtaIcons";
 import TourGallery from "@/components/TourGallery";
 import ReviewsList from "@/components/ReviewsList";
@@ -38,12 +38,10 @@ export default async function TourDetailPage({
           <section className="glass-panel overflow-hidden rounded-[40px] p-6 sm:p-8">
             <div className="grid gap-6 lg:grid-cols-[1.04fr_0.96fr] lg:items-center">
               <div className="relative min-h-[360px] overflow-hidden rounded-[32px]">
-                <Image
+                <TourCardImage
                   src={tour.image}
                   alt={tour.title}
-                  fill
                   priority
-                  className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 52vw"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(12,48,94,0.44))]" />

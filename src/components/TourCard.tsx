@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Tour } from "@/data/tours";
 import { ArrowRightIcon } from "@/components/CtaIcons";
 import ReviewSummary from "@/components/ReviewSummary";
+import TourCardImage from "@/components/TourCardImage";
 
 function formatPrice(value: number) {
   return value.toLocaleString("th-TH");
@@ -20,13 +20,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
   return (
     <article className="soft-card group flex h-full flex-col overflow-hidden rounded-[32px] p-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_74px_-44px_rgba(21,74,136,0.48)]">
       <div className="relative aspect-[4/3] overflow-hidden rounded-[26px]">
-        <Image
-          src={tour.image}
-          alt={tour.title}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+        <TourCardImage src={tour.image} alt={tour.title} />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(12,48,94,0.22))]" />
 
         <div className="absolute left-3 top-3 flex flex-wrap gap-2">
