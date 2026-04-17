@@ -27,7 +27,9 @@ export default function ReviewsList({ tourId }: ReviewsListProps) {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch(`/api/reviews/${tourId}`);
+        const response = await fetch(`/api/reviews/${tourId}`, {
+          cache: "no-store",
+        });
         const data = await response.json();
         setReviews(data.reviews || []);
         setAverageRating(data.averageRating || 0);

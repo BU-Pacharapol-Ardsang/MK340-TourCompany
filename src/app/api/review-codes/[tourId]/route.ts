@@ -3,6 +3,9 @@ import { requireDatabaseUrl } from "@/lib/env";
 
 const sql = neon(requireDatabaseUrl());
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(
   _req: Request,
   { params }: { params: { tourId: string } },
@@ -46,14 +49,29 @@ export async function GET(
         : null,
     }));
 
-    return Response.json({
-      codes: normalizedCodes,
-      total: normalizedCodes.length,
-      unusedCount: normalizedCodes.filter((item) => !item.used).length,
-      usedCount: normalizedCodes.filter((item) => item.used).length,
-    });
+    return Response.json(
+      {
+        codes: normalizedCodes,
+        total: normalizedCodes.length,
+        unusedCount: normalizedCodes.filter((item) => !item.used).length,
+        usedCount: normalizedCodes.filter((item) => item.used).length,
+      },
+      {
+        headers: {
+          "Cache-Control": "no-store, max-age=0",
+        },
+      }
+    );
   } catch (error) {
     console.error("Error fetching review codes:", error);
-    return Response.json({ error: "Failed to fetch review codes" }, { status: 500 });
+    return Response.json(
+      { error: "Failed to fetch review codes" },
+      {
+        status: 500,
+        headers: {
+          "Cache-Control": "no-store, max-age=0",
+        },
+      }
+    );
   }
 }

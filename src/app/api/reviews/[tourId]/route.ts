@@ -13,7 +13,8 @@ type ReviewRow = {
   created_at: string;
 };
 
-export const revalidate = 60; // Cache for 60 seconds
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET(
   req: Request,
@@ -50,13 +51,28 @@ export async function GET(
     const averageRating =
       reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
 
-    return Response.json({
-      reviews,
-      averageRating: Math.round(averageRating * 10) / 10,
-      totalReviews: result.length,
-    });
+    return Response.json(
+      {
+        reviews,
+        averageRating: Math.round(averageRating * 10) / 10,
+        totalReviews: result.length,
+      },
+      {
+        headers: {
+          "Cache-Control": "no-store, max-age=0",
+        },
+      }
+    );
   } catch (error) {
     console.error("Error fetching reviews:", error);
-    return Response.json({ error: "Failed to fetch reviews" }, { status: 500 });
+    return Response.json(
+      { error: "Failed to fetch reviews" },
+      {
+        status: 500,
+        headers: {
+          "Cache-Control": "no-store, max-age=0",
+        },
+      }
+    );
   }
 }

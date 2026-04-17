@@ -46,7 +46,9 @@ export default function AdminReviewCodeGenerator({
     setIsLoadingCodes(true);
 
     try {
-      const response = await fetch(`/api/review-codes/${tourId}`);
+      const response = await fetch(`/api/review-codes/${tourId}`, {
+        cache: "no-store",
+      });
       const data = await response.json();
 
       if (!response.ok) {

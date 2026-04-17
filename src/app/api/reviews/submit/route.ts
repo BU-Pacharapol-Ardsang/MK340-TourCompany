@@ -65,36 +65,45 @@ export async function POST(req: Request) {
     // Limit to 5 images
     const limitedImageUrls = imageUrls.slice(0, 5);
 
-    // Create review record
     const reviewId = `review_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`;
-    await sql`
-      INSERT INTO reviews (
-        id,
-        tour_id,
-        review_code_id,
-        name,
-        email,
-        rating,
-        comment,
-        images
-      ) VALUES (
-        ${reviewId},
-        ${tourId},
-        ${reviewCodeId},
-        ${name},
-        ${email},
-        ${rating},
-        ${comment || null},
-        ${JSON.stringify(limitedImageUrls)}
+    const insertResult = await sql`
+      WITH updated_code AS (
+        UPDATE review_codes
+        SET used = true, used_by = ${email}, updated_at = NOW()
+        WHERE id = ${reviewCodeId} AND used = false
+        RETURNING id
+      ), inserted_review AS (
+        INSERT INTO reviews (
+          id,
+          tour_id,
+          review_code_id,
+          name,
+          email,
+          rating,
+          comment,
+          images
+        )
+        SELECT
+          ${reviewId},
+          ${tourId},
+          updated_code.id,
+          ${name},
+          ${email},
+          ${rating},
+          ${comment || null},
+          ${JSON.stringify(limitedImageUrls)}
+        FROM updated_code
+        RETURNING id
       )
+      SELECT id FROM inserted_review
     `;
 
-    // Mark review code as used
-    await sql`
-      UPDATE review_codes
-      SET used = true, used_by = ${email}
-      WHERE id = ${reviewCodeId}
-    `;
+    if (insertResult.length === 0) {
+      return Response.json(
+        { error: "Invalid or already used review code" },
+        { status: 400 }
+      );
+    }
 
     return Response.json({
       success: true,
